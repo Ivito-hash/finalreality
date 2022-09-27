@@ -1,5 +1,5 @@
 /*
- * "Final Reality" (c) by R8V and ~Your name~
+ * "Final Reality" (c) by R8V and ~Ivo Fuenzalida~
  * "Final Reality" is licensed under a
  * Creative Commons Attribution 4.0 International License.
  * You should have received a copy of the license along with this
@@ -19,13 +19,9 @@ import org.jetbrains.annotations.NotNull;
  * A Black Mage is a type of player character that can cast black magic.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
- * @version 2.0
+ * @author ~Ivo Fuenzalida~
  */
-public class BlackMage extends AbstractPlayerCharacter {
-
-  private int currentMp;
-  private final int maxMp;
+public class BlackMage extends AbstractMageCharacter {
 
   /**
    * Creates a new Black Mage.
@@ -34,47 +30,19 @@ public class BlackMage extends AbstractPlayerCharacter {
    *     the character's name
    * @param maxHp
    *     the character's max hp
+   * @param maxMp
+   *     the character's max mp
    * @param defense
    *     the character's defense
    * @param turnsQueue
    *     the queue with the characters waiting for their turn
    */
   protected BlackMage(final @NotNull String name, final int maxHp, final int defense,
-      int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
+      final int maxMp, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
       throws InvalidStatValueException {
-    super(name, maxHp, defense, turnsQueue);
-    Require.statValueAtLeast(0, maxMp, "Max MP");
-    this.maxMp = maxMp;
-    this.currentMp = maxMp;
+    super(name, maxHp, maxMp, defense, turnsQueue);
   }
 
-  // region : ACCESSORS
-
-  /**
-   * Returns the character's current MP.
-   */
-  private int getCurrentMp() {
-    return currentMp;
-  }
-
-  /**
-   * Sets the character's current MP.
-   */
-  private void setCurrentMp(final int currentMp) throws InvalidStatValueException {
-    Require.statValueAtLeast(0, currentMp, "Current MP");
-    Require.statValueAtMost(maxMp, currentMp, "Current MP");
-    this.currentMp = currentMp;
-  }
-
-  /**
-   * Returns the character's max MP.
-   */
-  private int getMaxMp() {
-    return maxMp;
-  }
-  // endregion
-
-  // region : UTILITY METHODS
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
@@ -86,19 +54,18 @@ public class BlackMage extends AbstractPlayerCharacter {
     return hashCode() == that.hashCode()
         && name.equals(that.name)
         && maxHp == that.maxHp
-        && defense == that.defense
-        && maxMp == that.maxMp;
+        && maxMp == that.maxMp
+        && defense == that.defense;
   }
 
   @Override
   public String toString() {
-    return "BlackMage{currentMp=%d, maxMp=%d, maxHp=%d, defense=%d, name='%s'}"
-        .formatted(currentMp, maxMp, maxHp, defense, name);
+    return "BlackMage{maxHp=%d, maxMp=%d, defense=%d, name='%s'}"
+        .formatted(maxHp, maxMp, defense, name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(BlackMage.class, name, maxHp, defense, maxMp);
+    return Objects.hash(BlackMage.class, name, maxHp, maxMp, defense);
   }
-  // endregion
 }
