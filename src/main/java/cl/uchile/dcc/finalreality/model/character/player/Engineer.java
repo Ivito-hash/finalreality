@@ -1,5 +1,5 @@
 /*
- * "Final Reality" (c) by R8V and ~Your name~
+ * "Final Reality" (c) by R8V and ~Ivo Fuenzalida~
  * "Final Reality" is licensed under a
  * Creative Commons Attribution 4.0 International License.
  * You should have received a copy of the license along with this
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
  * A {@link PlayerCharacter} that can equip {@code Axe}s and {@code Bow}s.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Ivo Fuenzalida~
  */
 public class Engineer extends AbstractPlayerCharacter {
 
@@ -43,16 +43,6 @@ public class Engineer extends AbstractPlayerCharacter {
   }
 
   @Override
-  public String toString() {
-    return "Engineer{maxHp=%d, defense=%d, name='%s'}".formatted(maxHp, defense, name);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(Engineer.class, name, maxHp, defense);
-  }
-
-  @Override
   public boolean equals(final Object obj) {
     if (this == obj) {
       return true;
@@ -65,4 +55,15 @@ public class Engineer extends AbstractPlayerCharacter {
         && maxHp == that.maxHp
         && defense == that.defense;
   }
+
+  @Override
+  public String toString() {
+    return "Engineer{maxHp=%d, defense=%d, name='%s'}".formatted(maxHp, defense, name);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(Engineer.class, name, maxHp, defense);
+  }
+
 }

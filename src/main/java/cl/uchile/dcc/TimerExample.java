@@ -11,10 +11,16 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
+ * A example.
+ *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
+ * @author ~Ivo Fuenzalida~
  */
 public class TimerExample {
 
+  /**
+   * A example with timer of the queue.
+   */
   public static void main(String[] args)
       throws InterruptedException, InvalidStatValueException {
     BlockingQueue<GameCharacter> queue = new LinkedBlockingQueue<>();
