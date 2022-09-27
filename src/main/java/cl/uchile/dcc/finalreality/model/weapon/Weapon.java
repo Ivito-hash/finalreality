@@ -10,6 +10,7 @@ import java.util.Objects;
  */
 public class Weapon {
 
+  //ola
   private final String name;
   private final int damage;
   private final int weight;
