@@ -11,10 +11,8 @@ package cl.uchile.dcc.finalreality.model.weapon;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
-
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A {@link PlayerCharacter} that can equip {@code Axe}s and {@code Bow}s.
@@ -41,7 +39,7 @@ public class Staff extends Weapon {
    *     the queue with the characters waiting for their turn
    */
   public Staff(final @NotNull String name, final int damage, int magic,
-               final int weight, final WeaponType type) throws InvalidStatValueException{
+               final int weight, final WeaponType type) throws InvalidStatValueException {
     super(name, damage, weight, type);
     Require.statValueAtLeast(1, magic, "Magic");
     this.magic = magic;
@@ -71,5 +69,6 @@ public class Staff extends Weapon {
 
   @Override
   public int hashCode() {
-    return Objects.hash(Staff.class, name, damage, magic, weight, type);}
+    return Objects.hash(Staff.class, name, damage, magic, weight, type);
+  }
 }

@@ -9,10 +9,8 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
-
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A {@link PlayerCharacter} that can equip {@code Axe}s and {@code Bow}s.
@@ -62,5 +60,6 @@ public class Sword extends Weapon {
 
   @Override
   public int hashCode() {
-    return Objects.hash(Sword.class, name, damage, weight, type);}
+    return Objects.hash(Sword.class, name, damage, weight, type);
+  }
 }
