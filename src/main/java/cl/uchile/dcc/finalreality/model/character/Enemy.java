@@ -26,7 +26,7 @@ public class Enemy extends AbstractCharacter {
           throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
     Require.statValueAtLeast(1, weight, "Weight");
-    Require.statValueAtLeast(0, damage, "Damage");
+    Require.statValueAtLeast(1, damage, "Damage");
     this.damage = damage;
     this.weight = weight;
   }
