@@ -24,7 +24,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * A example.
  *
- * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Ivo Fuenzalida~
  */
 public class main {
