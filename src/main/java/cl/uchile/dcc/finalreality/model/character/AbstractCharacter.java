@@ -13,15 +13,15 @@ import org.jetbrains.annotations.NotNull;
  * An abstract class that holds the common behaviour of all the characters in the game.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
- * @author ~Your name~
+ * @author ~Ivo Fuenzalida~
  */
 public abstract class AbstractCharacter implements GameCharacter {
 
+  protected final String name;
   private int currentHp;
   protected int maxHp;
   protected int defense;
   protected final BlockingQueue<GameCharacter> turnsQueue;
-  protected final String name;
   private ScheduledExecutorService scheduledExecutor;
 
   /**
@@ -40,13 +40,16 @@ public abstract class AbstractCharacter implements GameCharacter {
       @NotNull BlockingQueue<GameCharacter> turnsQueue) throws InvalidStatValueException {
     Require.statValueAtLeast(1, maxHp, "Max HP");
     Require.statValueAtLeast(0, defense, "Defense");
-    this.maxHp = maxHp;
+    this.name = name;
     this.currentHp = maxHp;
+    this.maxHp = maxHp;
     this.defense = defense;
     this.turnsQueue = turnsQueue;
-    this.name = name;
   }
 
+  /**
+   * Create the standby instance of the character.
+   */
   @Override
   public void waitTurn() {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
@@ -76,26 +79,41 @@ public abstract class AbstractCharacter implements GameCharacter {
     scheduledExecutor.shutdown();
   }
 
+  /**
+   * Returns the name of the character.
+   */
   @Override
   public String getName() {
     return name;
   }
 
+  /**
+   * Returns the current health points of the character.
+   */
   @Override
   public int getCurrentHp() {
     return currentHp;
   }
 
+  /**
+   * Returns the maximum health points of the character.
+   */
   @Override
   public int getMaxHp() {
     return maxHp;
   }
 
+  /**
+   * Returns the value defense of the character.
+   */
   @Override
   public int getDefense() {
     return defense;
   }
 
+  /**
+   * Set the system of health points.
+   */
   @Override
   public void setCurrentHp(int hp) throws InvalidStatValueException {
     Require.statValueAtLeast(0, hp, "Current HP");

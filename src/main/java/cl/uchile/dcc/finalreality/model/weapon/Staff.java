@@ -6,41 +6,43 @@
  * work. If not, see <http://creativecommons.org/licenses/by/4.0/>.
  */
 
-package cl.uchile.dcc.finalreality.model.character.player;
+package cl.uchile.dcc.finalreality.model.weapon;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
-import cl.uchile.dcc.finalreality.model.character.GameCharacter;
+import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import java.util.Objects;
-import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A White Mage is a type of player character that can cast white magic.
+ * A {@link PlayerCharacter} that can equip {@code Axe}s and {@code Bow}s.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Ivo Fuenzalida~
  */
-public class WhiteMage extends AbstractMageCharacter {
+public class Staff extends Weapon {
+
+  private final int magic;
 
   /**
-   * Creates a new Black Mage.
+   * Creates a new bow.
    *
    * @param name
    *     the character's name
-   * @param maxHp
+   * @param damage
    *     the character's max hp
-   * @param maxMp
-   *     the character's max mp
-   * @param defense
+   * @param magic damage
+   *     the character's max hp
+   * @param weight
    *     the character's defense
-   * @param turnsQueue
+   * @param type
    *     the queue with the characters waiting for their turn
    */
-  public WhiteMage(final @NotNull String name, final int maxHp, final int maxMp,
-          final int defense, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
-          throws InvalidStatValueException {
-    super(name, maxHp, maxMp, defense, turnsQueue);
+  public Staff(final @NotNull String name, final int damage, int magic,
+               final int weight, final WeaponType type) throws InvalidStatValueException {
+    super(name, damage, weight, type);
+    Require.statValueAtLeast(1, magic, "Magic");
+    this.magic = magic;
   }
 
   @Override
@@ -48,24 +50,25 @@ public class WhiteMage extends AbstractMageCharacter {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof final WhiteMage that)) {
+    if (!(o instanceof final Staff that)) {
       return false;
     }
     return hashCode() == that.hashCode()
             && name.equals(that.name)
-            && maxHp == that.maxHp
-            && maxMp == that.maxMp
-            && defense == that.defense;
+            && damage == that.damage
+            && magic == that.magic
+            && weight == that.weight
+            && type == that.type;
   }
 
   @Override
   public String toString() {
-    return "WhiteMage{maxHp=%d, maxMp=%d, defense=%d, name='%s'}"
-            .formatted(maxHp, maxMp, defense, name);
+    return "Staff{name='%s', damage=%d, magic=%d, weight=%d, type=%s}"
+            .formatted(name, damage, magic, weight, type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(WhiteMage.class, name, maxHp, maxMp, defense);
+    return Objects.hash(Staff.class, name, damage, magic, weight, type);
   }
 }
