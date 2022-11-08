@@ -13,6 +13,7 @@ import cl.uchile.dcc.finalreality.model.weapon.Bow;
 import cl.uchile.dcc.finalreality.model.weapon.Knife;
 import cl.uchile.dcc.finalreality.model.weapon.Staff;
 import cl.uchile.dcc.finalreality.model.weapon.Sword;
+import cl.uchile.dcc.finalreality.model.weapon.WeaponInterface;
 import cl.uchile.dcc.finalreality.model.weapon.WeaponType;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
