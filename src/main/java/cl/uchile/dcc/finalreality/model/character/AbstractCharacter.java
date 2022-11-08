@@ -48,38 +48,6 @@ public abstract class AbstractCharacter implements GameCharacter {
   }
 
   /**
-   * Create the standby instance of the character.
-   */
-  @Override
-  public void waitTurn() {
-    scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-    if (this instanceof PlayerCharacter player) {
-      scheduledExecutor.schedule(
-          /* command = */ this::addToQueue,
-          /* delay = */ player.getEquippedWeapon().getWeight() / 10,
-          /* unit = */ TimeUnit.SECONDS);
-    } else {
-      var enemy = (Enemy) this;
-      scheduledExecutor.schedule(
-          /* command = */ this::addToQueue,
-          /* delay = */ enemy.getWeight() / 10,
-          /* unit = */ TimeUnit.SECONDS);
-    }
-  }
-
-  /**
-   * Adds this character to the turns queue.
-   */
-  private void addToQueue() {
-    try {
-      turnsQueue.put(this);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    scheduledExecutor.shutdown();
-  }
-
-  /**
    * Returns the name of the character.
    */
   @Override

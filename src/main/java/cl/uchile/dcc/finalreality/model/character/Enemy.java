@@ -4,6 +4,11 @@ import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -16,6 +21,7 @@ public class Enemy extends AbstractCharacter {
 
   private final int damage;
   private final int weight;
+  private ScheduledExecutorService scheduledExecutor;
 
   /**
    * Creates a new enemy with a name, a damage, a weight and
@@ -70,5 +76,29 @@ public class Enemy extends AbstractCharacter {
   @Override
   public int hashCode() {
     return Objects.hash(Enemy.class, name, maxHp, defense, damage, weight);
+  }
+
+  /**
+   * Create the standby instance of the character.
+   */
+  @Override
+  public void waitTurn() {
+    scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+    scheduledExecutor.schedule(
+              /* command = */ this::addToQueue,
+              /* delay = */ getWeight() / 10,
+              /* unit = */ TimeUnit.SECONDS);
+  }
+
+  /**
+   * Adds this character to the turns queue.
+   */
+  public void addToQueue() {
+    try {
+      turnsQueue.put(this);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    scheduledExecutor.shutdown();
   }
 }

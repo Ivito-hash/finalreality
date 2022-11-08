@@ -31,8 +31,8 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractMageCharacter extends AbstractPlayerCharacter {
 
-  public final int maxMp;
-  public int currentMp;
+  protected final int maxMp;
+  protected int currentMp;
 
   /**
    * Creates a new Mage.
