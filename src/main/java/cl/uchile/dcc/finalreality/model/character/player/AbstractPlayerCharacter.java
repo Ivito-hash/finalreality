@@ -16,7 +16,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -45,7 +44,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
    * @param turnsQueue the queue with the characters waiting for their turn
    */
   protected AbstractPlayerCharacter(@NotNull final String name, final int maxHp,
-                                    final int defense, @NotNull final BlockingQueue<GameCharacter> turnsQueue)
+                                    final int defense,
+                                    @NotNull final BlockingQueue<GameCharacter> turnsQueue)
           throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
   }
