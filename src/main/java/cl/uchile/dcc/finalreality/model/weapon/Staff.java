@@ -10,7 +10,7 @@ package cl.uchile.dcc.finalreality.model.weapon;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
+import cl.uchile.dcc.finalreality.model.character.player.*;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
@@ -70,5 +70,30 @@ public class Staff extends Weapon {
   @Override
   public int hashCode() {
     return Objects.hash(Staff.class, name, damage, magic, weight, type);
+  }
+
+  @Override
+  public WeaponInterface equipBlackMage(BlackMage BM) {
+    return this;
+  }
+
+  @Override
+  public WeaponInterface equipEngineer(Engineer E) {
+    return null;
+  }
+
+  @Override
+  public WeaponInterface equipKnight(Knight K) {
+    return null;
+  }
+
+  @Override
+  public WeaponInterface equipThief(Thief T) {
+    return null;
+  }
+
+  @Override
+  public WeaponInterface equipWhiteMage(WhiteMage WM) {
+    return this;
   }
 }

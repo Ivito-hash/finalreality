@@ -8,7 +8,9 @@
 
 package cl.uchile.dcc.finalreality.model.weapon;
 
+import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
+import cl.uchile.dcc.finalreality.model.character.player.*;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,7 +35,7 @@ public class Sword extends Weapon {
    *     the queue with the characters waiting for their turn
    */
   public Sword(final @NotNull String name, final int damage, final int weight,
-               final WeaponType type) {
+               final WeaponType type) throws InvalidStatValueException {
     super(name, damage, weight, type);
   }
 
@@ -61,5 +63,30 @@ public class Sword extends Weapon {
   @Override
   public int hashCode() {
     return Objects.hash(Sword.class, name, damage, weight, type);
+  }
+
+  @Override
+  public WeaponInterface equipBlackMage(BlackMage BM) {
+    return null;
+  }
+
+  @Override
+  public WeaponInterface equipEngineer(Engineer E) {
+    return null;
+  }
+
+  @Override
+  public WeaponInterface equipKnight(Knight K) {
+    return this;
+  }
+
+  @Override
+  public WeaponInterface equipThief(Thief T) {
+    return this;
+  }
+
+  @Override
+  public WeaponInterface equipWhiteMage(WhiteMage WM) {
+    return null;
   }
 }

@@ -13,6 +13,8 @@ import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
+
+import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -56,6 +58,10 @@ public class WhiteMage extends AbstractMageCharacter {
             && maxHp == that.maxHp
             && maxMp == that.maxMp
             && defense == that.defense;
+  }
+
+  public void equip(Weapon weapon) {
+    equippedWeapon = (Weapon) weapon.equipWhiteMage(this);
   }
 
   @Override

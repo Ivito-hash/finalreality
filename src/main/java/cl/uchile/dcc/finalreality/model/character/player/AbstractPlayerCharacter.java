@@ -29,10 +29,10 @@ import org.jetbrains.annotations.NotNull;
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Ivo Fuenzalida~
  */
-public class AbstractPlayerCharacter extends AbstractCharacter implements
+public abstract class AbstractPlayerCharacter extends AbstractCharacter implements
     PlayerCharacter {
 
-  private Weapon equippedWeapon = null;
+  protected Weapon equippedWeapon = null;
   private ScheduledExecutorService scheduledExecutor;
 
   /**
@@ -48,11 +48,6 @@ public class AbstractPlayerCharacter extends AbstractCharacter implements
                                     final int defense, @NotNull final BlockingQueue<GameCharacter> turnsQueue)
           throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
-  }
-
-  @Override
-  public void equip(Weapon weapon) {
-    this.equippedWeapon = weapon;
   }
 
   @Override
