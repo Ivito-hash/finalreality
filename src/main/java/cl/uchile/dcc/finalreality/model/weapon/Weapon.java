@@ -1,20 +1,12 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
-import java.util.Objects;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.exceptions.Require;
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
 import cl.uchile.dcc.finalreality.model.character.player.Engineer;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
 import cl.uchile.dcc.finalreality.model.character.player.Thief;
 import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import org.jetbrains.annotations.NotNull;
-import cl.uchile.dcc.finalreality.model.weapon.WeaponInterface;
 
 /**
  * A class that holds all the information of a weapon.
@@ -32,7 +24,7 @@ public abstract class Weapon implements WeaponInterface {
    * Creates a weapon with a name, a base damage, speed, and it's type.
    */
   public Weapon(@NotNull String name, int damage, int weight,
-      WeaponType type) throws InvalidStatValueException{
+      WeaponType type) throws InvalidStatValueException {
     this.name = name;
     this.damage = damage;
     this.weight = weight;
@@ -68,7 +60,7 @@ public abstract class Weapon implements WeaponInterface {
   }
 
   @Override
-  public WeaponInterface equipBlackMage(BlackMage BM) {
+  public WeaponInterface equipBlackMage(BlackMage Bm) {
     return null;
   }
 
@@ -88,7 +80,7 @@ public abstract class Weapon implements WeaponInterface {
   }
 
   @Override
-  public WeaponInterface equipWhiteMage(WhiteMage WM) {
+  public WeaponInterface equipWhiteMage(WhiteMage Wm) {
     return null;
   }
 }

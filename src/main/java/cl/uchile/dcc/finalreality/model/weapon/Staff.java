@@ -10,7 +10,12 @@ package cl.uchile.dcc.finalreality.model.weapon;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
-import cl.uchile.dcc.finalreality.model.character.player.*;
+import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
+import cl.uchile.dcc.finalreality.model.character.player.Engineer;
+import cl.uchile.dcc.finalreality.model.character.player.Knight;
+import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
+import cl.uchile.dcc.finalreality.model.character.player.Thief;
+import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
@@ -73,7 +78,7 @@ public class Staff extends Weapon {
   }
 
   @Override
-  public WeaponInterface equipBlackMage(BlackMage BM) {
+  public WeaponInterface equipBlackMage(BlackMage Bm) {
     return this;
   }
 
@@ -93,7 +98,7 @@ public class Staff extends Weapon {
   }
 
   @Override
-  public WeaponInterface equipWhiteMage(WhiteMage WM) {
+  public WeaponInterface equipWhiteMage(WhiteMage Wm) {
     return this;
   }
 }

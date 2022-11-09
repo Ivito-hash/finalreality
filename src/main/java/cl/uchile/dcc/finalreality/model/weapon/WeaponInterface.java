@@ -1,9 +1,9 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
 import cl.uchile.dcc.finalreality.model.character.player.Engineer;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
+import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.Thief;
 import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
 
@@ -40,7 +40,7 @@ public interface WeaponInterface {
    * method [equipBlackMage] check if a weapon can equip to a Black Mage.
    * return Boolean.
    */
-  WeaponInterface equipBlackMage(BlackMage BM);
+  WeaponInterface equipBlackMage(BlackMage Bm);
 
   /**
    * method [equipEngineer] check if a weapon can equip to Engineer.
@@ -64,6 +64,6 @@ public interface WeaponInterface {
    * method [equipWhiteMage] check if a weapon can equip to a White Mage.
    * return Boolean.
    */
-  WeaponInterface equipWhiteMage(WhiteMage WM);
+  WeaponInterface equipWhiteMage(WhiteMage Wm);
 
 }
