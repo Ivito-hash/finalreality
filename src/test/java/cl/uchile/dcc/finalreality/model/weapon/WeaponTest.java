@@ -59,6 +59,7 @@ class WeaponTest {
         assertEquals(Broadsword.getName(),"Broad Sword");
         assertEquals(MithrilJavelin.getName(),Javelin.getName());
         assertNotEquals(Dagger.getName(),ShortBow.getName());
+        assertNotNull(Javelin.getName());
     }
 
     @Test
@@ -77,6 +78,7 @@ class WeaponTest {
     void getType() {
         assertEquals(MithrilJavelin.getType(),Javelin.getType());
         assertNotEquals(Dagger.getType(), ShortBow.getType());
+        assertNotNull(Javelin.getType());
     }
 
     @Test
@@ -87,9 +89,8 @@ class WeaponTest {
         assertNotNull(Dagger.equipBlackMage(Vivi));
         assertNotNull(Rod.equipBlackMage(Vivi));
         assertNull(Broadsword.equipBlackMage(Vivi));
-
         assertEquals(Rod, Rod.equipBlackMage(Vivi));
-        assertNotEquals(Dagger.equipBlackMage(Vivi),Rod.equipBlackMage(Vivi));
+        assertNotEquals(Dagger.equipBlackMage(Vivi), Rod.equipBlackMage(Vivi));
     }
 
     @Test
@@ -100,7 +101,6 @@ class WeaponTest {
         assertNull(Dagger.equipEngineer(Cid));
         assertNull(Rod.equipEngineer(Cid));
         assertNull(Broadsword.equipEngineer(Cid));
-
         assertEquals(Javelin, Javelin.equipEngineer(Cid));
         assertEquals(MithrilJavelin.equipEngineer(Cid), Javelin.equipEngineer(Cid));
         assertNotEquals(Javelin.equipEngineer(Cid),ShortBow.equipEngineer(Cid));
@@ -114,7 +114,6 @@ class WeaponTest {
         assertNotNull(Dagger.equipKnight(Steiner));
         assertNull(Rod.equipKnight(Steiner));
         assertNotNull(Broadsword.equipKnight(Steiner));
-
         assertEquals(Javelin, Javelin.equipKnight(Steiner));
         assertEquals(MithrilJavelin.equipKnight(Steiner), Javelin.equipKnight(Steiner));
         assertNotEquals(Javelin.equipKnight(Steiner),Dagger.equipKnight(Steiner));
@@ -128,7 +127,6 @@ class WeaponTest {
         assertNotNull(Dagger.equipThief(Zidane));
         assertNull(Rod.equipThief(Zidane));
         assertNotNull(Broadsword.equipThief(Zidane));
-
         assertEquals(Dagger, Dagger.equipThief(Zidane));
         assertNotEquals(Dagger.equipThief(Zidane),Broadsword.equipThief(Zidane));
     }
@@ -141,7 +139,6 @@ class WeaponTest {
         assertNull(Dagger.equipWhiteMage(Garnet));
         assertNotNull(Rod.equipWhiteMage(Garnet));
         assertNull(Broadsword.equipWhiteMage(Garnet));
-
         assertEquals(Rod, Rod.equipWhiteMage(Garnet));
         assertNotEquals(Rod.equipWhiteMage(Garnet),Javelin.equipWhiteMage(Garnet));
     }
