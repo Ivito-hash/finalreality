@@ -50,6 +50,13 @@ public class Staff extends Weapon {
     this.magic = magic;
   }
 
+  /**
+   * Returns the ability damage to the weapon.
+   */
+  public int getMagic() {
+    return magic;
+  }
+
   @Override
   public boolean equals(final Object o) {
     if (this == o) {

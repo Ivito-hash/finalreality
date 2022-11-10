@@ -32,7 +32,6 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     PlayerCharacter {
 
   protected Weapon equippedWeapon = null;
-  private ScheduledExecutorService scheduledExecutor;
 
   /**
    * Creates a new character.
@@ -65,17 +64,5 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
               /* command = */ this::addToQueue,
               /* delay = */ getEquippedWeapon().getWeight() / 10,
               /* unit = */ TimeUnit.SECONDS);
-  }
-
-  /**
-   * Adds this character to the turns queue.
-   */
-  public void addToQueue() {
-    try {
-      turnsQueue.put(this);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    scheduledExecutor.shutdown();
   }
 }

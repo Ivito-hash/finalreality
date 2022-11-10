@@ -82,5 +82,8 @@ public class main {
       // order
       System.out.println(queue.poll().toString());
     }
+    System.out.println(Dagger.getDamage());
+    System.out.println(Dagger.getWeight());
+    System.out.println(Dagger.getType());
   }
 }
