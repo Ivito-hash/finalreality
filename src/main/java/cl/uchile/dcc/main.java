@@ -41,21 +41,20 @@ public class main {
     final Knight Freya = new Knight("Freya", 100, 20, queue);
     final Engineer Cid = new Engineer("Cid", 85, 18, queue);
     /*======================Weapons======================*/
-    final Knife Dagger = new Knife("Dagger", 12, 23, WeaponType.KNIFE);
+    final Knife Dagger = new Knife("Dagger", 12, 10, WeaponType.KNIFE);
     final Staff MageStaff = new Staff("Mage Staff", 12, 24, 16, WeaponType.STAFF);
-    final Staff Rod = new Staff("Rod", 11, 23, 21, WeaponType.STAFF);
-    final Sword Broadsword = new Sword("Broadsword", 12, 18, WeaponType.SWORD);
+    final Staff Rod = new Staff("Rod", 11, 20, 30, WeaponType.STAFF);
+    final Sword Broadsword = new Sword("Broadsword", 40, 40, WeaponType.SWORD);
     final Axe Javelin = new Axe("Javelin", 18, 20, WeaponType.AXE);
     final Staff GolemFlute = new Staff("Golem's Flute", 17, 21, 19, WeaponType.STAFF);
-    final Bow Shortbow = new Bow("Shortbow", 10, 10, WeaponType.BOW);
+    final Bow ShortBow = new Bow("Shortbow", 10, 20, WeaponType.BOW);
+    final Staff OakRod = new Staff("Oak Rod", 16, 42, 50, WeaponType.STAFF);
     /*======================Equipment======================*/
-    Zidane.equip(Dagger);
-    Vivi.equip(MageStaff);
-    Garnet.equip(Rod);
+    Vivi.equip(OakRod);
+    Cid.equip(ShortBow);
     Steiner.equip(Broadsword);
-    Freya.equip(Javelin);
-    Eiko.equip(GolemFlute);
-    Cid.equip(Shortbow);
+    Zidane.equip(Dagger);
+    Garnet.equip(Rod);
     /*======================Enemies======================*/
     final Enemy MaskedMan = new Enemy("Masked Man", 188, 10, 8, 19, queue);
     final Enemy KingLeo = new Enemy("King Leo", 186, 10, 8, 19, queue);
@@ -63,18 +62,11 @@ public class main {
     final Enemy Baku = new Enemy("Baku", 202, 10, 9, 19, queue);
     final Enemy Beatrix = new Enemy("Beatrix", 3630, 10, 22, 41, queue);
     /*========================QUEUE========================*/
-    Zidane.waitTurn();
     Vivi.waitTurn();
-    Garnet.waitTurn();
-    Steiner.waitTurn();
-    Freya.waitTurn();
-    Eiko.waitTurn();
     Cid.waitTurn();
-    MaskedMan.waitTurn();
-    KingLeo.waitTurn();
-    Haagen.waitTurn();
-    Baku.waitTurn();
-    Beatrix.waitTurn();
+    Steiner.waitTurn();
+    Zidane.waitTurn();
+    Garnet.waitTurn();
     // Waits for 6 seconds to ensure that all characters have finished waiting
     Thread.sleep(6000);
     while (!queue.isEmpty()) {

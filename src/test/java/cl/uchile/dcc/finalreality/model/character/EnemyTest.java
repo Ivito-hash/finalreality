@@ -3,6 +3,9 @@ package cl.uchile.dcc.finalreality.model.character;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -16,13 +19,23 @@ class EnemyTest {
     Enemy Baku;
     Enemy MaskedMan;
     Enemy Haagen;
+    Enemy Beatrix;
+    /*=============================Lists=============================*/
+    List<String> nombres;
+    List<String> cola;
 
     @BeforeEach
     void setUp() throws InvalidStatValueException {
         /*============================Enemies============================*/
-        Baku = new Enemy("Baku", 188, 10, 8, 19, queue);
-        MaskedMan = new Enemy("Baku", 188, 10, 8, 19, queue);
-        Haagen = new Enemy("Haagen", 33, 8, 7, 18, queue);
+        Baku = new Enemy("Baku", 188, 10, 8, 30, queue);
+        MaskedMan = new Enemy("Baku", 188, 10, 8, 30, queue);
+        Haagen = new Enemy("Haagen", 66, 8, 7, 15, queue);
+        Beatrix = new Enemy("Beatrix", 630, 10, 22, 40, queue);
+        /*===================================QUEUE===================================*/
+        nombres = new ArrayList<>();
+        nombres.add("Haagen");
+        nombres.add("Baku");
+        nombres.add("Beatrix");
     }
 
     @Test
@@ -39,10 +52,10 @@ class EnemyTest {
 
     @Test
     void testEquals() {
-        assertTrue(MaskedMan.equals(Baku));
         assertEquals(MaskedMan, Baku);
-        assertFalse(Haagen.equals(Baku));
         assertNotEquals(Haagen, Baku);
+        assertEquals(MaskedMan.equals(Beatrix), Haagen.equals(Baku));
+        assertNotEquals(MaskedMan.equals(Baku), Haagen.equals(Baku));
     }
 
     @Test
@@ -64,6 +77,18 @@ class EnemyTest {
     }
 
     @Test
-    void waitTurn() {
+    void waitTurn() throws InterruptedException {
+        Baku.waitTurn();
+        Haagen.waitTurn();
+        Beatrix.waitTurn();
+        // Waits for 6 seconds to ensure that all characters have finished waiting
+        Thread.sleep(6000);
+        cola = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            // Pops and prints the names of the characters of the queue to illustrate the turns
+            // order
+            cola.add(queue.poll().getName());
+        }
+        assertEquals(cola, nombres);
     }
 }

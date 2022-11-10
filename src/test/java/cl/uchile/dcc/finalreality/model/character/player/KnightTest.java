@@ -50,6 +50,9 @@ class KnightTest {
 
     @Test
     void equip() {
+        Steiner.equip(Broadsword);
+        assertEquals(Broadsword.equipKnight(Steiner), Steiner.equippedWeapon);
+        assertNotEquals(Javelin.equipKnight(Steiner), Steiner.equippedWeapon);
     }
 
     @Test

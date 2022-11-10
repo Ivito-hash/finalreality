@@ -50,6 +50,9 @@ class EngineerTest {
 
     @Test
     void equip() {
+        Cid.equip(ShortBow);
+        assertEquals(ShortBow.equipEngineer(Cid), Cid.equippedWeapon);
+        assertNotEquals(Javelin.equipEngineer(Cid), Cid.equippedWeapon);
     }
 
     @Test

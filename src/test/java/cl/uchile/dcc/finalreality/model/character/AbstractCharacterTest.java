@@ -77,12 +77,16 @@ class AbstractCharacterTest {
 
     @Test
     void getDefense() {
+        assertEquals(Vivi.getDefense(),12);
         assertEquals(BlackMagician.getDefense(),Vivi.getDefense());
         assertNotEquals(Cid.getDefense(), Zidane.getDefense());
     }
 
     @Test
-    void setCurrentHp() {
+    void setCurrentHp() throws InvalidStatValueException {
+        Vivi.setCurrentHp(30);
+        assertEquals(Vivi.getCurrentHp(),30);
+        assertThrows(InvalidStatValueException.class, ()->Vivi.setCurrentHp(-1));
     }
 
     @Test

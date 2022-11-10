@@ -1,6 +1,7 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
 import cl.uchile.dcc.finalreality.model.character.player.Engineer;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
@@ -25,6 +26,8 @@ public abstract class Weapon implements WeaponInterface {
    */
   public Weapon(@NotNull String name, int damage, int weight,
       WeaponType type) throws InvalidStatValueException {
+    Require.statValueAtLeast(1, damage, "Damage");
+    Require.statValueAtLeast(1, weight, "Weight");
     this.name = name;
     this.damage = damage;
     this.weight = weight;
@@ -57,30 +60,5 @@ public abstract class Weapon implements WeaponInterface {
    */
   public WeaponType getType() {
     return type;
-  }
-
-  @Override
-  public WeaponInterface equipBlackMage(BlackMage Bm) {
-    return null;
-  }
-
-  @Override
-  public WeaponInterface equipEngineer(Engineer E) {
-    return null;
-  }
-
-  @Override
-  public WeaponInterface equipKnight(Knight K) {
-    return null;
-  }
-
-  @Override
-  public WeaponInterface equipThief(Thief T) {
-    return null;
-  }
-
-  @Override
-  public WeaponInterface equipWhiteMage(WhiteMage Wm) {
-    return null;
   }
 }

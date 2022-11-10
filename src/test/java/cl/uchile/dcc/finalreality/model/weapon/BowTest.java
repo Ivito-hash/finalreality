@@ -64,6 +64,7 @@ class BowTest {
         assertEquals(LongBow.toString(), "Bow{name='"+LongBow.getName()+"', damage="+LongBow.getDamage()+", weight="+LongBow.getWeight()+", type="+LongBow.getType()+"}");
         assertEquals(StrenghtBow.toString(), "Bow{name='"+StrenghtBow.getName()+"', damage="+StrenghtBow.getDamage()+", weight="+StrenghtBow.getWeight()+", type="+StrenghtBow.getType()+"}");
         assertEquals(PracticeBow.toString(), ShortBow.toString());
+        assertNotEquals(ShortBow.toString(), LongBow.toString());
         assertNotEquals(StrenghtBow.toString(), LongBow.toString());
     }
 
@@ -74,6 +75,7 @@ class BowTest {
         assertEquals(LongBow.hashCode(), Objects.hash(Bow.class, LongBow.getName(), LongBow.getDamage(), LongBow.getWeight(), LongBow.getType()));
         assertEquals(StrenghtBow.hashCode(), Objects.hash(Bow.class, StrenghtBow.getName(), StrenghtBow.getDamage(), StrenghtBow.getWeight(), StrenghtBow.getType()));
         assertEquals(ShortBow.hashCode(), PracticeBow.hashCode());
+        assertNotEquals(ShortBow.hashCode(), LongBow.hashCode());
         assertNotEquals(StrenghtBow.hashCode(), LongBow.hashCode());
     }
 

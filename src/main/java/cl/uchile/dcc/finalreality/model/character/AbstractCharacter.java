@@ -2,10 +2,8 @@ package cl.uchile.dcc.finalreality.model.character;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
-
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -88,10 +86,10 @@ public abstract class AbstractCharacter implements GameCharacter {
     currentHp = hp;
   }
 
-  @Override
   /**
    * Adds this character to the turns queue.
    */
+  @Override
   public void addToQueue() {
     try {
       turnsQueue.put(this);

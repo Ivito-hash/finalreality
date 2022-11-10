@@ -50,6 +50,9 @@ class ThiefTest {
 
     @Test
     void equip() {
+        Zidane.equip(Dagger);
+        assertEquals(Dagger.equipThief(Zidane), Zidane.equippedWeapon);
+        assertNotEquals(ShortBow.equipThief(Zidane), Zidane.equippedWeapon);
     }
 
     @Test

@@ -57,6 +57,7 @@ class WeaponTest {
         assertEquals(Dagger.getName(),"Dagger");
         assertEquals(Rod.getName(),"Rod");
         assertEquals(Broadsword.getName(),"Broad Sword");
+        assertNotEquals(Javelin.getName(),"Mithril Javelin");
         assertEquals(MithrilJavelin.getName(),Javelin.getName());
         assertNotEquals(Dagger.getName(),ShortBow.getName());
         assertNotNull(Javelin.getName());
@@ -64,20 +65,34 @@ class WeaponTest {
 
     @Test
     void getDamage() {
+        assertEquals(Javelin.getDamage(),18);
+        assertEquals(MithrilJavelin.getDamage(),18);
+        assertEquals(ShortBow.getDamage(),10);
+        assertEquals(Dagger.getDamage(),12);
+        assertEquals(Rod.getDamage(),11);
+        assertEquals(Broadsword.getDamage(),12);
+        assertNotEquals(Javelin.getDamage(),1);
         assertEquals(MithrilJavelin.getDamage(),Javelin.getDamage());
-        assertNotEquals(Dagger.getDamage(), ShortBow.getDamage());
+        assertNotEquals(Broadsword.getDamage(), ShortBow.getDamage());
     }
 
     @Test
     void getWeight() {
+        assertEquals(Javelin.getWeight(),20);
+        assertEquals(MithrilJavelin.getWeight(),20);
+        assertEquals(ShortBow.getWeight(),10);
+        assertEquals(Dagger.getWeight(),23);
+        assertEquals(Rod.getWeight(),21);
+        assertEquals(Broadsword.getWeight(),18);
+        assertNotEquals(Javelin.getWeight(),1);
         assertEquals(MithrilJavelin.getWeight(),Javelin.getWeight());
-        assertNotEquals(Dagger.getWeight(), ShortBow.getWeight());
+        assertNotEquals(Broadsword.getWeight(), ShortBow.getWeight());
     }
 
     @Test
     void getType() {
         assertEquals(MithrilJavelin.getType(),Javelin.getType());
-        assertNotEquals(Dagger.getType(), ShortBow.getType());
+        assertNotEquals(Broadsword.getType(), ShortBow.getType());
         assertNotNull(Javelin.getType());
     }
 
@@ -114,9 +129,9 @@ class WeaponTest {
         assertNotNull(Dagger.equipKnight(Steiner));
         assertNull(Rod.equipKnight(Steiner));
         assertNotNull(Broadsword.equipKnight(Steiner));
-        assertEquals(Javelin, Javelin.equipKnight(Steiner));
+        assertEquals(Broadsword, Broadsword.equipKnight(Steiner));
         assertEquals(MithrilJavelin.equipKnight(Steiner), Javelin.equipKnight(Steiner));
-        assertNotEquals(Javelin.equipKnight(Steiner),Dagger.equipKnight(Steiner));
+        assertNotEquals(Broadsword.equipKnight(Steiner),Dagger.equipKnight(Steiner));
     }
 
     @Test
@@ -138,7 +153,7 @@ class WeaponTest {
         assertNull(ShortBow.equipWhiteMage(Garnet));
         assertNull(Dagger.equipWhiteMage(Garnet));
         assertNotNull(Rod.equipWhiteMage(Garnet));
-        assertNull(Broadsword.equipWhiteMage(Garnet));
+        assertNull(ShortBow.equipWhiteMage(Garnet));
         assertEquals(Rod, Rod.equipWhiteMage(Garnet));
         assertNotEquals(Rod.equipWhiteMage(Garnet),Javelin.equipWhiteMage(Garnet));
     }

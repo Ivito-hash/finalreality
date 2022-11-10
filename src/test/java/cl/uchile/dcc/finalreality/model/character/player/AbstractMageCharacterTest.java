@@ -38,6 +38,9 @@ class AbstractMageCharacterTest {
     }
 
     @Test
-    void setCurrentMp() {
+    void setCurrentMp() throws InvalidStatValueException {
+        Vivi.setCurrentMp(30);
+        assertEquals(Vivi.getCurrentMp(),30);
+        assertThrows(InvalidStatValueException.class, ()->Vivi.setCurrentMp(-1));
     }
 }

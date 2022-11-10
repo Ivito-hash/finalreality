@@ -52,9 +52,9 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter {
           final int defense, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
           throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
-    Require.statValueAtLeast(0, maxMp, "Max MP");
-    this.maxMp = maxMp;
+    Require.statValueAtLeast(1, maxMp, "Max MP");
     this.currentMp = maxMp;
+    this.maxMp = maxMp;
   }
 
   /**
@@ -74,9 +74,9 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter {
   /**
    * Sets the character's current MP.
    */
-  public void setCurrentMp(final int currentMp) throws InvalidStatValueException {
-    Require.statValueAtLeast(0, currentMp, "Current MP");
-    Require.statValueAtMost(maxMp, currentMp, "Current MP");
-    this.currentMp = currentMp;
+  public void setCurrentMp(int mp) throws InvalidStatValueException {
+    Require.statValueAtLeast(0, mp, "Current MP");
+    Require.statValueAtMost(maxMp, mp, "Current MP");
+    currentMp = mp;
   }
 }

@@ -50,6 +50,9 @@ class WhiteMageTest {
 
     @Test
     void equip() {
+        Garnet.equip(Rod);
+        assertEquals(Rod.equipWhiteMage(Garnet), Garnet.equippedWeapon);
+        assertNotEquals(Dagger.equipWhiteMage(Garnet), Garnet.equippedWeapon);
     }
 
     @Test

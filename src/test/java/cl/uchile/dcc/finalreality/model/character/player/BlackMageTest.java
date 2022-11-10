@@ -49,6 +49,9 @@ class BlackMageTest {
 
     @Test
     void equip() {
+        Vivi.equip(Rod);
+        assertEquals(Rod.equipBlackMage(Vivi), Vivi.equippedWeapon);
+        assertNotEquals(Dagger.equipBlackMage(Vivi), Vivi.equippedWeapon);
     }
 
     @Test
