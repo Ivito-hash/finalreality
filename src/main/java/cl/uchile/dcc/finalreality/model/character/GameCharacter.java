@@ -12,12 +12,6 @@ import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 public interface GameCharacter {
 
   /**
-   * Sets a scheduled executor to make this character (thread) wait for {@code speed / 10}
-   * seconds before adding the character to the queue.
-   */
-  void waitTurn();
-
-  /**
    * Returns this character's name.
    */
   String getName();
@@ -33,14 +27,20 @@ public interface GameCharacter {
   int getMaxHp();
 
   /**
+   * Sets this character's current HP to {@code newHp}.
+   */
+  void setCurrentHp(int hp) throws InvalidStatValueException;
+
+  /**
    * Returns this character's defense.
    */
   int getDefense();
 
   /**
-   * Sets this character's current HP to {@code newHp}.
+   * Sets a scheduled executor to make this character (thread) wait for {@code speed / 10}
+   * seconds before adding the character to the queue.
    */
-  void setCurrentHp(int hp) throws InvalidStatValueException;
+  void waitTurn();
 
   /**
    * Adds this character to the turns queue.

@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
  * @author ~Ivo Fuenzalida~
  */
 
-public abstract class AbstractMageCharacter extends AbstractPlayerCharacter {
+public abstract class AbstractMageCharacter extends AbstractPlayerCharacter implements Mage {
 
   protected final int maxMp;
   protected int currentMp;

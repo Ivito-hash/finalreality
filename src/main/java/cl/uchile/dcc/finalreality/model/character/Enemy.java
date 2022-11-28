@@ -5,7 +5,6 @@ import cl.uchile.dcc.finalreality.exceptions.Require;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,6 +22,20 @@ public class Enemy extends AbstractCharacter {
   /**
    * Creates a new enemy with a name, a damage, a weight and
    * the queue with the characters ready to play.
+   *
+   * @param name
+   *     the enemy's name
+   * @param maxHp
+   *     the enemy's health
+   * @param defense
+   *     the enemy's defense
+   * @param damage
+   *     the enemy's damage
+   * @param weight
+   *     the enemy's weight
+   * @param turnsQueue
+   *     the queue with all the characters waiting for their turn
+   *
    */
   public Enemy(@NotNull final String name, int maxHp, int defense, int damage,
                final int weight, @NotNull final BlockingQueue<GameCharacter> turnsQueue)
@@ -35,17 +48,17 @@ public class Enemy extends AbstractCharacter {
   }
 
   /**
-   * Returns the weight of this enemy.
-   */
-  public int getWeight() {
-    return weight;
-  }
-
-  /**
    * Returns the damage to this enemy.
    */
   public int getDamage() {
     return damage;
+  }
+
+  /**
+   * Returns the weight of this enemy.
+   */
+  public int getWeight() {
+    return weight;
   }
 
   @Override
@@ -53,26 +66,27 @@ public class Enemy extends AbstractCharacter {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof final Enemy enemy)) {
+    if (!(o instanceof Enemy)) {
       return false;
     }
+    final Enemy enemy = (Enemy) o;
     return hashCode() == enemy.hashCode()
-        && name.equals(enemy.name)
-        && maxHp == enemy.maxHp
-        && defense == enemy.defense
-        && damage == enemy.damage
-        && weight == enemy.weight;
+        && getName().equals(enemy.getName())
+        && getMaxHp() == enemy.getMaxHp()
+        && getDefense() == enemy.getDefense()
+        && getDamage() == enemy.getDamage()
+        && getWeight() == enemy.getWeight();
   }
 
   @Override
   public String toString() {
-    return "Enemy{maxHp=%d, defense=%d, damage=%d, weight=%d, name='%s'}"
-            .formatted(maxHp, defense, damage, weight, name);
+    return "Enemy{name='%s', currentHp=%d, defense=%d, damage=%d, weight=%d}"
+            .formatted(getName(), getCurrentHp(), getDefense(), getDamage(), getWeight());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(Enemy.class, name, maxHp, defense, damage, weight);
+    return Objects.hash(Enemy.class, getName(), getDefense(), getDamage(), getWeight());
   }
 
   /**

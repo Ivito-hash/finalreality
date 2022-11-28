@@ -14,10 +14,11 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class AbstractCharacter implements GameCharacter {
 
-  protected final String name;
-  private int currentHp;
+  private final String name;
   protected int maxHp;
-  protected int defense;
+  private int currentHp;
+
+  private final int defense;
   protected final BlockingQueue<GameCharacter> turnsQueue;
   protected ScheduledExecutorService scheduledExecutor;
 

@@ -3,7 +3,6 @@ package cl.uchile.dcc.finalreality.model.weapon;
 import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
 import cl.uchile.dcc.finalreality.model.character.player.Engineer;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.Thief;
 import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
 
@@ -32,38 +31,33 @@ public interface WeaponInterface {
   int getWeight();
 
   /**
-  * Returns the type of the weapon.
-  */
-  WeaponType getType();
+   * method [equipBlackMage] equip weaponto a Black Mage.
+   */
+  void equipBlackMage(BlackMage blackmage);
 
   /**
-   * method [equipBlackMage] check if a weapon can equip to a Black Mage.
-   * return Boolean.
+   * method [equipEngineer] equip weapon to Engineer.
    */
-  WeaponInterface equipBlackMage(BlackMage Bm);
+  void equipEngineer(Engineer engineer);
 
   /**
-   * method [equipEngineer] check if a weapon can equip to Engineer.
-   * return Boolean.
+   * method [equipKnight] equip weapon to a Knight.
    */
-  WeaponInterface equipEngineer(Engineer E);
+  void equipKnight(Knight knight);
 
   /**
-   * method [equipKnight] check if a weapon can equip to a Knight.
-   * return Boolean.
+   * method [equipThief] equip weapon to a Thief.
    */
-  WeaponInterface equipKnight(Knight K);
+  void equipThief(Thief thief);
 
   /**
-   * method [equipThief] check if a weapon can equip to a Thief.
-   * return Boolean.
+   * method [equipWhiteMage] equip weapon to a White Mage.
    */
-  WeaponInterface equipThief(Thief T);
+  void equipWhiteMage(WhiteMage whitemage);
 
   /**
-   * method [equipWhiteMage] check if a weapon can equip to a White Mage.
-   * return Boolean.
+   * method [toString]
+   * returns a String with the class of this weapon.
    */
-  WeaponInterface equipWhiteMage(WhiteMage Wm);
-
+  String toString();
 }

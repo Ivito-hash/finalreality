@@ -12,9 +12,9 @@ import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
+import cl.uchile.dcc.finalreality.model.weapon.WeaponInterface;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AbstractPlayerCharacter extends AbstractCharacter implements
     PlayerCharacter {
 
-  protected Weapon equippedWeapon = null;
+  private WeaponInterface equippedWeapon;
 
   /**
    * Creates a new character.
@@ -47,11 +47,31 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
                                     @NotNull final BlockingQueue<GameCharacter> turnsQueue)
           throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
+    this.equippedWeapon = null;
   }
 
+  /**
+   * Return equipped weapon by character.
+   */
   @Override
-  public Weapon getEquippedWeapon() {
+  public WeaponInterface getEquippedWeapon() {
     return equippedWeapon;
+  }
+
+  /**
+   * Set weapon to player character.
+   */
+  @Override
+  public void setEquippedWeapon(WeaponInterface weapon) {
+    this.equippedWeapon = weapon;
+  }
+
+  /**
+   * Returns this player character's attack damage.
+   */
+  @Override
+  public int getDamageCharacter() {
+    return this.equippedWeapon.getDamage();
   }
 
   /**

@@ -9,17 +9,13 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
-import cl.uchile.dcc.finalreality.model.character.player.Engineer;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
-import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.Thief;
-import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A {@link PlayerCharacter} that can equip {@code Axe}s and {@code Bow}s.
+ * Sword Class.
  *
  * @author <a href="https://www.github.com/r8vnhill">R8V</a>
  * @author ~Ivo Fuenzalida~
@@ -27,20 +23,34 @@ import org.jetbrains.annotations.NotNull;
 public class Sword extends Weapon {
 
   /**
-   * Creates a new bow.
+   * Creates a new sword.
    *
    * @param name
-   *     the character's name
+   *     the sword's name
    * @param damage
-   *     the character's max hp
+   *     the sword's damage
    * @param weight
-   *     the character's defense
-   * @param type
-   *     the queue with the characters waiting for their turn
+   *     the sword's weight
    */
-  public Sword(final @NotNull String name, final int damage, final int weight,
-               final WeaponType type) throws InvalidStatValueException {
-    super(name, damage, weight, type);
+  public Sword(final @NotNull String name, final int damage, final int weight)
+               throws InvalidStatValueException {
+    super(name, damage, weight);
+  }
+
+  /**
+   * A sword will be equipped on a Knight.
+   */
+  @Override
+  public void equipKnight(Knight knight) {
+    knight.setEquippedWeapon(this);
+  }
+
+  /**
+   * A sword will be equipped on a Thief.
+   */
+  @Override
+  public void equipThief(Thief thief) {
+    thief.setEquippedWeapon(this);
   }
 
   @Override
@@ -48,49 +58,22 @@ public class Sword extends Weapon {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof final Sword that)) {
+    if (!(o instanceof Sword)) {
       return false;
     }
-    return hashCode() == that.hashCode()
-            && name.equals(that.name)
-            && damage == that.damage
-            && weight == that.weight
-            && type == that.type;
+    final Sword weapon = (Sword) o;
+    return getName().equals(weapon.getName())
+           && getDamage() == weapon.getDamage()
+           && getWeight() == weapon.getWeight();
   }
 
   @Override
   public String toString() {
-    return "Sword{name='%s', damage=%d, weight=%d, type=%s}"
-            .formatted(name, damage, weight, type);
+    return "Sword";
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(Sword.class, name, damage, weight, type);
-  }
-
-  @Override
-  public WeaponInterface equipBlackMage(BlackMage Bm) {
-    return null;
-  }
-
-  @Override
-  public WeaponInterface equipEngineer(Engineer E) {
-    return null;
-  }
-
-  @Override
-  public WeaponInterface equipKnight(Knight K) {
-    return this;
-  }
-
-  @Override
-  public WeaponInterface equipThief(Thief T) {
-    return this;
-  }
-
-  @Override
-  public WeaponInterface equipWhiteMage(WhiteMage Wm) {
-    return null;
+    return Objects.hash(Sword.class, getName(), getDamage(), getWeight());
   }
 }

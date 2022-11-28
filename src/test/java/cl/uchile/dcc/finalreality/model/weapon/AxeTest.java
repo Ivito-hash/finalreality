@@ -33,10 +33,10 @@ class AxeTest {
     @BeforeEach
     void setUp() throws InvalidStatValueException {
         /*===================================Weapons===================================*/
-        Javelin = new Axe("Javelin", 18, 20, WeaponType.AXE);
-        MithrilJavelin = new Axe("Javelin", 18, 20, WeaponType.AXE);
-        Partisane = new Axe("Partisane", 25, 20, WeaponType.AXE);
-        Obelisk = new Axe("Obelisk", 52, 40, WeaponType.AXE);
+        Javelin = new Axe("Javelin", 18, 20);
+        MithrilJavelin = new Axe("Javelin", 18, 20);
+        Partisane = new Axe("Partisane", 25, 20);
+        Obelisk = new Axe("Obelisk", 52, 40);
         /*=================================Characters=================================*/
         Vivi = new BlackMage("Vivi", 60, 48, 12, queue);
         Cid = new Engineer("Cid", 85, 18, queue);
