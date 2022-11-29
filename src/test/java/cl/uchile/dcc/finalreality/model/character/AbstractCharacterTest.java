@@ -31,10 +31,10 @@ class AbstractCharacterTest {
     @BeforeEach
     void setUp() throws InvalidStatValueException {
         /*===================================Weapons===================================*/
-        ShortBow = new Bow("Short Bow", 10, 10, WeaponType.BOW);
-        Dagger = new Knife("Dagger", 12, 23, WeaponType.KNIFE);
-        Rod = new Staff("Rod", 11, 23, 21, WeaponType.STAFF);
-        Broadsword = new Sword("Broad Sword", 12, 18, WeaponType.SWORD);
+        ShortBow = new Bow("Short Bow", 10, 10);
+        Dagger = new Knife("Dagger", 12, 23);
+        Rod = new Staff("Rod", 11, 23, 21);
+        Broadsword = new Sword("Broad Sword", 12, 18);
         /*=================================Characters=================================*/
         Vivi = new BlackMage("Vivi", 60, 48, 12, queue);
         BlackMagician = new BlackMage("Vivi", 60, 48, 12, queue);
@@ -87,9 +87,5 @@ class AbstractCharacterTest {
         Vivi.setCurrentHp(30);
         assertEquals(Vivi.getCurrentHp(),30);
         assertThrows(InvalidStatValueException.class, ()->Vivi.setCurrentHp(-1));
-    }
-
-    @Test
-    void addToQueue() {
     }
 }

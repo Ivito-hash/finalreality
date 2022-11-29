@@ -9,9 +9,8 @@
 package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
-import cl.uchile.dcc.finalreality.exceptions.Require;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
-import cl.uchile.dcc.finalreality.model.weapon.Weapon;
+import cl.uchile.dcc.finalreality.model.weapon.WeaponInterface;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
@@ -44,33 +43,32 @@ public class WhiteMage extends AbstractMageCharacter {
     super(name, maxHp, maxMp, defense, turnsQueue);
   }
 
+  public void equip(WeaponInterface weapon) {
+    weapon.equipWhiteMage(this);
+  }
+
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof final WhiteMage that)) {
+    if (!(o instanceof final WhiteMage whitemage)) {
       return false;
     }
-    return hashCode() == that.hashCode()
-            && name.equals(that.name)
-            && maxHp == that.maxHp
-            && maxMp == that.maxMp
-            && defense == that.defense;
-  }
-
-  public void equip(Weapon weapon) {
-    equippedWeapon = (Weapon) weapon.equipWhiteMage(this);
+    return getName().equals(whitemage.getName())
+           && getMaxHp() == whitemage.getMaxHp()
+           && getMaxMp() == whitemage.getMaxMp()
+           && getDefense() == whitemage.getDefense();
   }
 
   @Override
   public String toString() {
-    return "WhiteMage{maxHp=%d, maxMp=%d, defense=%d, name='%s'}"
-            .formatted(maxHp, maxMp, defense, name);
+    return "WhiteMage{name='%s', maxHp=%d, maxMp=%d, defense=%d}"
+            .formatted(getName(), getMaxHp(), getMaxMp(), getDefense());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(WhiteMage.class, name, maxHp, maxMp, defense);
+    return Objects.hash(WhiteMage.class, getName(), getMaxHp(), getMaxMp(), getDefense());
   }
 }

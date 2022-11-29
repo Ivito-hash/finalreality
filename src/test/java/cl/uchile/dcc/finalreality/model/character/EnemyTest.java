@@ -3,7 +3,6 @@ package cl.uchile.dcc.finalreality.model.character;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -60,9 +59,7 @@ class EnemyTest {
 
     @Test
     void testToString() {
-        assertEquals(Baku.toString(), "Enemy{maxHp="+Baku.getMaxHp()+", defense="+Baku.getDefense()+", damage="+Baku.getDamage()+", weight="+Baku.getWeight()+", name='"+Baku.getName()+"'}");
-        assertEquals(MaskedMan.toString(), "Enemy{maxHp="+MaskedMan.getMaxHp()+", defense="+MaskedMan.getDefense()+", damage="+MaskedMan.getDamage()+", weight="+MaskedMan.getWeight()+", name='"+MaskedMan.getName()+"'}");
-        assertEquals(Haagen.toString(), "Enemy{maxHp="+Haagen.getMaxHp()+", defense="+Haagen.getDefense()+", damage="+Haagen.getDamage()+", weight="+Haagen.getWeight()+", name='"+Haagen.getName()+"'}");
+        assertEquals(Baku.toString(), "Enemy{name='"+Baku.getName()+"', maxHp="+Baku.getMaxHp()+", defense="+Baku.getDefense()+", damage="+Baku.getDamage()+", weight="+Baku.getWeight()+"}");
         assertEquals(MaskedMan.toString(), Baku.toString());
         assertNotEquals(Haagen.toString(), Baku.toString());
     }
@@ -70,8 +67,6 @@ class EnemyTest {
     @Test
     void testHashCode() {
         assertEquals(Baku.hashCode(), Objects.hash(Enemy.class, Baku.getName(), Baku.getMaxHp(), Baku.getDefense(), Baku.getDamage(), Baku.getWeight()));
-        assertEquals(MaskedMan.hashCode(), Objects.hash(Enemy.class, MaskedMan.getName(), MaskedMan.getMaxHp(), MaskedMan.getDefense(), MaskedMan.getDamage(), MaskedMan.getWeight()));
-        assertEquals(Haagen.hashCode(), Objects.hash(Enemy.class, Haagen.getName(), Haagen.getMaxHp(), Haagen.getDefense(), Haagen.getDamage(), Haagen.getWeight()));
         assertEquals(Baku.hashCode(), MaskedMan.hashCode());
         assertNotEquals(Haagen.hashCode(), Baku.hashCode());
     }

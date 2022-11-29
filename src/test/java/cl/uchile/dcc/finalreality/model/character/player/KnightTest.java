@@ -5,7 +5,6 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -33,33 +32,40 @@ class KnightTest {
         Freya = new Knight("Steiner", 120, 24, queue);
         Cloud = new Knight("Cloud", 110, 18, queue);
         /*===================================Weapons===================================*/
-        Javelin = new Axe("Javelin", 18, 20, WeaponType.AXE);
-        ShortBow = new Bow("Short Bow", 10, 10, WeaponType.BOW);
-        Dagger = new Knife("Dagger", 12, 23, WeaponType.KNIFE);
-        Rod = new Staff("Rod", 11, 23, 21, WeaponType.STAFF);
-        Broadsword = new Sword("Broad Sword", 12, 18, WeaponType.SWORD);
-    }
-
-    @Test
-    void testEquals() {
-        assertTrue(Freya.equals(Steiner));
-        assertEquals(Freya, Steiner);
-        assertFalse(Cloud.equals(Steiner));
-        assertNotEquals(Cloud, Steiner);
+        Javelin = new Axe("Javelin", 18, 20);
+        ShortBow = new Bow("Short Bow", 10, 10);
+        Dagger = new Knife("Dagger", 12, 23);
+        Rod = new Staff("Rod", 11, 23, 21);
+        Broadsword = new Sword("Broad Sword", 12, 18);
     }
 
     @Test
     void equip() {
+        assertNull(Steiner.getEquippedWeapon());
+        Steiner.equip(Javelin);
+        assertNull(Freya.getEquippedWeapon());
+        Freya.equip(Broadsword);
+        assertNotEquals(Steiner.getEquippedWeapon(), Freya.getEquippedWeapon());
         Steiner.equip(Broadsword);
-        assertEquals(Broadsword.equipKnight(Steiner), Steiner.equippedWeapon);
-        assertNotEquals(Javelin.equipKnight(Steiner), Steiner.equippedWeapon);
+        assertEquals(Steiner.getEquippedWeapon(), Freya.getEquippedWeapon());
+        Freya.equip(Dagger);
+        assertNotEquals(Steiner.getEquippedWeapon(), Freya.getEquippedWeapon());
+        Steiner.equip(Rod);
+        assertNull(Steiner.getEquippedWeapon());
+        assertNotEquals(Steiner.getEquippedWeapon(), Freya.getEquippedWeapon());
+        Freya.equip(ShortBow);
+        assertEquals(Steiner.getEquippedWeapon(), Freya.getEquippedWeapon());
+    }
+
+    @Test
+    void testEquals() {
+        assertEquals(Freya, Steiner);
+        assertNotEquals(Cloud, Steiner);
     }
 
     @Test
     void testToString() {
-        assertEquals(Steiner.toString(), "Knight{maxHp="+Steiner.getMaxHp()+", defense="+Steiner.getDefense()+", name='"+Steiner.getName()+"'}");
-        assertEquals(Freya.toString(), "Knight{maxHp="+Freya.getMaxHp()+", defense="+Freya.getDefense()+", name='"+Freya.getName()+"'}");
-        assertEquals(Cloud.toString(), "Knight{maxHp="+Cloud.getMaxHp()+", defense="+Cloud.getDefense()+", name='"+Cloud.getName()+"'}");
+        assertEquals(Steiner.toString(), "Knight{name='"+Steiner.getName()+"', maxHp="+Steiner.getMaxHp()+", defense="+Steiner.getDefense()+"}");
         assertEquals(Freya.toString(), Steiner.toString());
         assertNotEquals(Cloud.toString(), Steiner.toString());
     }
@@ -67,8 +73,6 @@ class KnightTest {
     @Test
     void testHashCode() {
         assertEquals(Steiner.hashCode(), Objects.hash(Knight.class, Steiner.getName(), Steiner.getMaxHp(), Steiner.getDefense()));
-        assertEquals(Freya.hashCode(), Objects.hash(Knight.class, Freya.getName(), Freya.getMaxHp(), Freya.getDefense()));
-        assertEquals(Cloud.hashCode(), Objects.hash(Knight.class, Cloud.getName(), Cloud.getMaxHp(), Cloud.getDefense()));
         assertEquals(Steiner.hashCode(), Freya.hashCode());
         assertNotEquals(Cloud.hashCode(), Steiner.hashCode());
     }

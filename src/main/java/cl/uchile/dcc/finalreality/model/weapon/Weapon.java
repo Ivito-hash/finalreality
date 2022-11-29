@@ -7,7 +7,6 @@ import cl.uchile.dcc.finalreality.model.character.player.Engineer;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
 import cl.uchile.dcc.finalreality.model.character.player.Thief;
 import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
-import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -18,8 +17,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class Weapon implements WeaponInterface {
   private final String name;
-  private int damage;
-  private int weight;
+  private final int damage;
+  private final int weight;
 
   /**
    * Creates a weapon with a name, a base damage, and speed.
@@ -56,26 +55,26 @@ public abstract class Weapon implements WeaponInterface {
 
   @Override
   public void equipBlackMage(BlackMage blackmage) {
-
+    blackmage.setEquippedWeapon(null);
   }
 
   @Override
   public void equipEngineer(Engineer engineer) {
-
+    engineer.setEquippedWeapon(null);
   }
 
   @Override
   public void equipKnight(Knight knight) {
-
+    knight.setEquippedWeapon(null);
   }
 
   @Override
   public void equipThief(Thief thief) {
-
+    thief.setEquippedWeapon(null);
   }
 
   @Override
   public void equipWhiteMage(WhiteMage whitemage) {
-
+    whitemage.setEquippedWeapon(null);
   }
 }

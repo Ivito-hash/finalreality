@@ -58,10 +58,9 @@ public class Bow extends Weapon {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof Bow)) {
+    if (!(o instanceof final Bow weapon)) {
       return false;
     }
-    final Bow weapon = (Bow) o;
     return getName().equals(weapon.getName())
            && getDamage() == weapon.getDamage()
            && getWeight() == weapon.getWeight();
@@ -69,7 +68,8 @@ public class Bow extends Weapon {
 
   @Override
   public String toString() {
-    return "Bow";
+    return "Bow{name='%s', damage=%d, weight=%d}"
+        .formatted(getName(), getDamage(), getWeight());
   }
 
   @Override

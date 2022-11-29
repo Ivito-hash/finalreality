@@ -9,9 +9,9 @@
 package cl.uchile.dcc.finalreality.model.weapon;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
+import cl.uchile.dcc.finalreality.model.character.player.BlackMage;
 import cl.uchile.dcc.finalreality.model.character.player.Knight;
 import cl.uchile.dcc.finalreality.model.character.player.Thief;
-import cl.uchile.dcc.finalreality.model.character.player.WhiteMage;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,6 +39,14 @@ public class Knife extends Weapon {
   }
 
   /**
+   * A knife will be equipped on a BlackMage.
+   */
+  @Override
+  public void equipBlackMage(BlackMage blackmage) {
+    blackmage.setEquippedWeapon(this);
+  }
+
+  /**
    * A knife will be equipped on a Knight.
    */
   @Override
@@ -54,23 +62,14 @@ public class Knife extends Weapon {
     thief.setEquippedWeapon(this);
   }
 
-  /**
-   * A knife will be equipped on a WhiteMage.
-   */
-  @Override
-  public void equipWhiteMage(WhiteMage whitemage) {
-    whitemage.setEquippedWeapon(this);
-  }
-
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof Knife)) {
+    if (!(o instanceof final Knife weapon)) {
       return false;
     }
-    final Knife weapon = (Knife) o;
     return getName().equals(weapon.getName())
            && getDamage() == weapon.getDamage()
            && getWeight() == weapon.getWeight();
@@ -78,7 +77,8 @@ public class Knife extends Weapon {
 
   @Override
   public String toString() {
-    return "Knife";
+    return "Knife{name='%s', damage=%d, weight=%d}"
+        .formatted(getName(), getDamage(), getWeight());
   }
 
   @Override

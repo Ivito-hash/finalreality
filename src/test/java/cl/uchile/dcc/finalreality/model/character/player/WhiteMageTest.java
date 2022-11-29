@@ -5,7 +5,6 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -33,33 +32,41 @@ class WhiteMageTest {
         Daga = new WhiteMage("Garnet", 70, 46, 14, queue);
         Eiko = new WhiteMage("Eiko", 65, 42, 13, queue);
         /*===================================Weapons===================================*/
-        Javelin = new Axe("Javelin", 18, 20, WeaponType.AXE);
-        ShortBow = new Bow("Short Bow", 10, 10, WeaponType.BOW);
-        Dagger = new Knife("Dagger", 12, 23, WeaponType.KNIFE);
-        Rod = new Staff("Rod", 11, 23, 21, WeaponType.STAFF);
-        Broadsword = new Sword("Broad Sword", 12, 18, WeaponType.SWORD);
-    }
-
-    @Test
-    void testEquals() {
-        assertTrue(Daga.equals(Garnet));
-        assertEquals(Daga, Garnet);
-        assertFalse(Eiko.equals(Garnet));
-        assertNotEquals(Eiko, Garnet);
+        Javelin = new Axe("Javelin", 18, 20);
+        ShortBow = new Bow("Short Bow", 10, 10);
+        Dagger = new Knife("Dagger", 12, 23);
+        Rod = new Staff("Rod", 11, 23, 21);
+        Broadsword = new Sword("Broad Sword", 12, 18);
     }
 
     @Test
     void equip() {
+        assertNull(Garnet.getEquippedWeapon());
         Garnet.equip(Rod);
-        assertEquals(Rod.equipWhiteMage(Garnet), Garnet.equippedWeapon);
-        assertNotEquals(Dagger.equipWhiteMage(Garnet), Garnet.equippedWeapon);
+        assertNull(Eiko.getEquippedWeapon());
+        Eiko.equip(Rod);
+        assertNotEquals(Javelin, Eiko.getEquippedWeapon());
+        assertEquals(Garnet.getEquippedWeapon(), Eiko.getEquippedWeapon());
+        Garnet.equip(Javelin);
+        assertNull(Garnet.getEquippedWeapon());
+        assertNotEquals(Garnet.getEquippedWeapon(), Eiko.getEquippedWeapon());
+        Garnet.equip(ShortBow);
+        assertNull(Garnet.getEquippedWeapon());
+        Eiko.equip(Broadsword);
+        assertNull(Eiko.getEquippedWeapon());
+        Eiko.equip(Dagger);
+        assertEquals(Garnet.getEquippedWeapon(), Eiko.getEquippedWeapon());
+    }
+
+    @Test
+    void testEquals() {
+        assertEquals(Daga, Garnet);
+        assertNotEquals(Eiko, Garnet);
     }
 
     @Test
     void testToString() {
-        assertEquals(Garnet.toString(), "WhiteMage{maxHp="+Garnet.getMaxHp()+", maxMp="+Garnet.getMaxMp()+", defense="+Garnet.getDefense()+", name='"+Garnet.getName()+"'}");
-        assertEquals(Daga.toString(), "WhiteMage{maxHp="+Daga.getMaxHp()+", maxMp="+Daga.getMaxMp()+", defense="+Daga.getDefense()+", name='"+Daga.getName()+"'}");
-        assertEquals(Eiko.toString(), "WhiteMage{maxHp="+Eiko.getMaxHp()+", maxMp="+Eiko.getMaxMp()+", defense="+Eiko.getDefense()+", name='"+Eiko.getName()+"'}");
+        assertEquals(Garnet.toString(), "WhiteMage{name='"+Garnet.getName()+"', maxHp="+Garnet.getMaxHp()+", maxMp="+Garnet.getMaxMp()+", defense="+Garnet.getDefense()+"}");
         assertEquals(Daga.toString(), Garnet.toString());
         assertNotEquals(Eiko.toString(), Garnet.toString());
     }
@@ -67,8 +74,6 @@ class WhiteMageTest {
     @Test
     void testHashCode() {
         assertEquals(Garnet.hashCode(), Objects.hash(WhiteMage.class, Garnet.getName(), Garnet.getMaxHp(), Garnet.getMaxMp(), Garnet.getDefense()));
-        assertEquals(Daga.hashCode(), Objects.hash(WhiteMage.class, Daga.getName(), Daga.getMaxHp(), Daga.getMaxMp(), Daga.getDefense()));
-        assertEquals(Eiko.hashCode(), Objects.hash(WhiteMage.class, Eiko.getName(), Eiko.getMaxHp(), Eiko.getMaxMp(), Eiko.getDefense()));
         assertEquals(Garnet.hashCode(), Daga.hashCode());
         assertNotEquals(Eiko.hashCode(), Garnet.hashCode());
     }

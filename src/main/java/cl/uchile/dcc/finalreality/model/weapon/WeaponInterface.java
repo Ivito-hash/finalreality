@@ -59,5 +59,4 @@ public interface WeaponInterface {
    * method [toString]
    * returns a String with the class of this weapon.
    */
-  String toString();
 }

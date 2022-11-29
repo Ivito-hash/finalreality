@@ -32,33 +32,43 @@ class BlackMageTest {
         BlackMagician = new BlackMage("Vivi", 60, 48, 12, queue);
         MatiasToro = new BlackMage("Matias Toro", 85, 56, 14, queue);
         /*===================================Weapons===================================*/
-        Javelin = new Axe("Javelin", 18, 20, WeaponType.AXE);
-        ShortBow = new Bow("Short Bow", 10, 10, WeaponType.BOW);
-        Dagger = new Knife("Dagger", 12, 23, WeaponType.KNIFE);
-        Rod = new Staff("Rod", 11, 23, 21, WeaponType.STAFF);
-        Broadsword = new Sword("Broad Sword", 12, 18, WeaponType.SWORD);
-    }
-
-    @Test
-    void testEquals() {
-        assertTrue(BlackMagician.equals(Vivi));
-        assertEquals(BlackMagician, Vivi);
-        assertFalse(MatiasToro.equals(Vivi));
-        assertNotEquals(MatiasToro, Vivi);
+        Javelin = new Axe("Javelin", 18, 20);
+        ShortBow = new Bow("Short Bow", 10, 10);
+        Dagger = new Knife("Dagger", 12, 23);
+        Rod = new Staff("Rod", 11, 23, 21);
+        Broadsword = new Sword("Broad Sword", 12, 18);
     }
 
     @Test
     void equip() {
+        assertNull(Vivi.getEquippedWeapon());
         Vivi.equip(Rod);
-        assertEquals(Rod.equipBlackMage(Vivi), Vivi.equippedWeapon);
-        assertNotEquals(Dagger.equipBlackMage(Vivi), Vivi.equippedWeapon);
+        assertNull(BlackMagician.getEquippedWeapon());
+        BlackMagician.equip(Dagger);
+        assertNotEquals(Vivi.getEquippedWeapon(), BlackMagician.getEquippedWeapon());
+        Vivi.equip(Dagger);
+        assertEquals(Vivi.getEquippedWeapon(), BlackMagician.getEquippedWeapon());
+        assertEquals(Vivi.getEquippedWeapon(), Dagger);
+        assertNotEquals(Vivi.getEquippedWeapon(), Rod);
+        Vivi.equip(Javelin);
+        assertNull(Vivi.getEquippedWeapon());
+        assertNotEquals(Vivi.getEquippedWeapon(), BlackMagician.getEquippedWeapon());
+        Vivi.equip(ShortBow);
+        assertNull(Vivi.getEquippedWeapon());
+        BlackMagician.equip(Broadsword);
+        assertEquals(Vivi.getEquippedWeapon(), BlackMagician.getEquippedWeapon());
+
+    }
+
+    @Test
+    void testEquals() {
+        assertEquals(BlackMagician, Vivi);
+        assertNotEquals(MatiasToro, Vivi);
     }
 
     @Test
     void testToString() {
-        assertEquals(Vivi.toString(), "BlackMage{maxHp="+Vivi.getMaxHp()+", maxMp="+Vivi.getMaxMp()+", defense="+Vivi.getDefense()+", name='"+Vivi.getName()+"'}");
-        assertEquals(BlackMagician.toString(), "BlackMage{maxHp="+BlackMagician.getMaxHp()+", maxMp="+BlackMagician.getMaxMp()+", defense="+BlackMagician.getDefense()+", name='"+BlackMagician.getName()+"'}");
-        assertEquals(MatiasToro.toString(), "BlackMage{maxHp="+MatiasToro.getMaxHp()+", maxMp="+MatiasToro.getMaxMp()+", defense="+MatiasToro.getDefense()+", name='"+MatiasToro.getName()+"'}");
+        assertEquals(Vivi.toString(), "BlackMage{name='"+Vivi.getName()+"', maxHp="+Vivi.getMaxHp()+", maxMp="+Vivi.getMaxMp()+", defense="+Vivi.getDefense()+"}");
         assertEquals(BlackMagician.toString(), Vivi.toString());
         assertNotEquals(MatiasToro.toString(), Vivi.toString());
     }
@@ -66,8 +76,6 @@ class BlackMageTest {
     @Test
     void testHashCode() {
         assertEquals(Vivi.hashCode(), Objects.hash(BlackMage.class, Vivi.getName(), Vivi.getMaxHp(), Vivi.getMaxMp(), Vivi.getDefense()));
-        assertEquals(BlackMagician.hashCode(), Objects.hash(BlackMage.class, BlackMagician.getName(), BlackMagician.getMaxHp(), BlackMagician.getMaxMp(), BlackMagician.getDefense()));
-        assertEquals(MatiasToro.hashCode(), Objects.hash(BlackMage.class, MatiasToro.getName(), MatiasToro.getMaxHp(), MatiasToro.getMaxMp(), MatiasToro.getDefense()));
         assertEquals(Vivi.hashCode(), BlackMagician.hashCode());
         assertNotEquals(MatiasToro.hashCode(), Vivi.hashCode());
     }

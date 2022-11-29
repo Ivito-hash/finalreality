@@ -33,10 +33,10 @@ class StaffTest {
     @BeforeEach
     void setUp() throws InvalidStatValueException {
         /*===================================Weapons===================================*/
-        Rod = new Staff("Rod", 11, 23, 21, WeaponType.STAFF);
-        MageStaff = new Staff("Rod", 11, 23, 21, WeaponType.STAFF);
-        WitchWand = new Staff("Witch Wand", 12, 30, 21, WeaponType.STAFF);
-        OakRod = new Staff("Oak Rod", 16, 42, 45, WeaponType.STAFF);
+        Rod = new Staff("Rod", 11, 23, 21);
+        MageStaff = new Staff("Rod", 11, 23, 21);
+        WitchWand = new Staff("Witch Wand", 12, 30, 21);
+        OakRod = new Staff("Oak Rod", 16, 42, 45);
         /*=================================Characters=================================*/
         Vivi = new BlackMage("Vivi", 60, 48, 12, queue);
         Cid = new Engineer("Cid", 85, 18, queue);
@@ -46,80 +46,42 @@ class StaffTest {
     }
 
     @Test
+    void testGets() {
+        assertEquals(MageStaff.getName(), Rod.getName());
+        assertEquals("Witch Wand", WitchWand.getName());
+        assertNotEquals(Rod.getName(), OakRod.getName());
+        assertNotEquals("Rod", OakRod.getName());
+        assertEquals(MageStaff.getDamage(), Rod.getDamage());
+        assertEquals(12, WitchWand.getDamage());
+        assertNotEquals(Rod.getDamage(), OakRod.getDamage());
+        assertNotEquals(12, OakRod.getDamage());
+        assertEquals(MageStaff.getWeight(), Rod.getWeight());
+        assertEquals(21, WitchWand.getWeight());
+        assertNotEquals(Rod.getWeight(), OakRod.getWeight());
+        assertNotEquals(21, OakRod.getWeight());
+        assertEquals(MageStaff.getMagic(), Rod.getMagic());
+        assertEquals(30, WitchWand.getMagic());
+        assertNotEquals(Rod.getMagic(), OakRod.getMagic());
+        assertNotEquals(30, OakRod.getMagic());
+    }
+
+    @Test
     void testEquals() {
-        assertTrue(MageStaff.equals(Rod));
         assertEquals(MageStaff, Rod);
-        assertFalse(WitchWand.equals(Rod));
-        assertNotEquals(WitchWand, Rod);
-        assertFalse(OakRod.equals(Rod));
-        assertNotEquals(OakRod, Rod);
-        assertFalse(OakRod.equals(WitchWand));
         assertNotEquals(OakRod, WitchWand);
     }
 
     @Test
     void testToString() {
-        assertEquals(Rod.toString(), "Staff{name='"+Rod.getName()+"', damage="+Rod.getDamage()+", magic="+Rod.getMagic()+", weight="+Rod.getWeight()+", type="+Rod.getType()+"}");
-        assertEquals(MageStaff.toString(), "Staff{name='"+MageStaff.getName()+"', damage="+MageStaff.getDamage()+", magic="+MageStaff.getMagic()+", weight="+MageStaff.getWeight()+", type="+MageStaff.getType()+"}");
-        assertEquals(WitchWand.toString(), "Staff{name='"+WitchWand.getName()+"', damage="+WitchWand.getDamage()+", magic="+WitchWand.getMagic()+", weight="+WitchWand.getWeight()+", type="+WitchWand.getType()+"}");
-        assertEquals(OakRod.toString(), "Staff{name='"+OakRod.getName()+"', damage="+OakRod.getDamage()+", magic="+OakRod.getMagic()+", weight="+OakRod.getWeight()+", type="+OakRod.getType()+"}");
+        assertEquals(Rod.toString(), "Staff{name='"+Rod.getName()+"', damage="+Rod.getDamage()+", magic="+Rod.getMagic()+", weight="+Rod.getWeight()+"}");
         assertEquals(MageStaff.toString(), Rod.toString());
         assertNotEquals(OakRod.toString(), WitchWand.toString());
     }
 
     @Test
     void testHashCode() {
-        assertEquals(Rod.hashCode(), Objects.hash(Staff.class, Rod.getName(), Rod.getDamage(), Rod.getMagic(), Rod.getWeight(), Rod.getType()));
-        assertEquals(MageStaff.hashCode(), Objects.hash(Staff.class, MageStaff.getName(), MageStaff.getDamage(), MageStaff.getMagic(), MageStaff.getWeight(), MageStaff.getType()));
-        assertEquals(WitchWand.hashCode(), Objects.hash(Staff.class, WitchWand.getName(), WitchWand.getDamage(), WitchWand.getMagic(), WitchWand.getWeight(), WitchWand.getType()));
-        assertEquals(OakRod.hashCode(), Objects.hash(Staff.class, OakRod.getName(), OakRod.getDamage(), OakRod.getMagic(), OakRod.getWeight(), OakRod.getType()));
+        assertEquals(Rod.hashCode(), Objects.hash(Staff.class, Rod.getName(), Rod.getDamage(), Rod.getMagic(), Rod.getWeight()));
         assertEquals(Rod.hashCode(), MageStaff.hashCode());
         assertNotEquals(OakRod.hashCode(), WitchWand.hashCode());
-    }
-
-    @Test
-    void equipBlackMage() {
-        assertNotNull(Rod.equipBlackMage(Vivi));
-        assertNotNull(MageStaff.equipBlackMage(Vivi));
-        assertNotNull(WitchWand.equipBlackMage(Vivi));
-        assertNotNull(OakRod.equipBlackMage(Vivi));
-        assertEquals(Rod, Rod.equipBlackMage(Vivi));
-        assertEquals(MageStaff.equipBlackMage(Vivi), Rod.equipBlackMage(Vivi));
-        assertNotEquals(OakRod.equipBlackMage(Vivi), WitchWand.equipBlackMage(Vivi));
-    }
-
-    @Test
-    void equipEngineer() {
-        assertNull(Rod.equipEngineer(Cid));
-        assertNull(MageStaff.equipEngineer(Cid));
-        assertNull(WitchWand.equipEngineer(Cid));
-        assertNull(OakRod.equipEngineer(Cid));
-    }
-
-    @Test
-    void equipKnight() {
-        assertNull(Rod.equipKnight(Steiner));
-        assertNull(MageStaff.equipKnight(Steiner));
-        assertNull(WitchWand.equipKnight(Steiner));
-        assertNull(OakRod.equipKnight(Steiner));
-    }
-
-    @Test
-    void equipThief() {
-        assertNull(Rod.equipThief(Zidane));
-        assertNull(MageStaff.equipThief(Zidane));
-        assertNull(WitchWand.equipThief(Zidane));
-        assertNull(OakRod.equipThief(Zidane));
-    }
-
-    @Test
-    void equipWhiteMage() {
-        assertNotNull(Rod.equipWhiteMage(Garnet));
-        assertNotNull(MageStaff.equipWhiteMage(Garnet));
-        assertNotNull(WitchWand.equipWhiteMage(Garnet));
-        assertNotNull(OakRod.equipWhiteMage(Garnet));
-        assertEquals(Rod, Rod.equipWhiteMage(Garnet));
-        assertEquals(MageStaff.equipWhiteMage(Garnet), Rod.equipWhiteMage(Garnet));
-        assertNotEquals(OakRod.equipWhiteMage(Garnet), WitchWand.equipWhiteMage(Garnet));
     }
 }

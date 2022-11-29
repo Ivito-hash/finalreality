@@ -10,7 +10,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
-import cl.uchile.dcc.finalreality.model.weapon.Weapon;
+import cl.uchile.dcc.finalreality.model.weapon.WeaponInterface;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
@@ -43,31 +43,32 @@ public class Thief extends AbstractPlayerCharacter {
     super(name, maxHp, defense, turnsQueue);
   }
 
+  public void equip(WeaponInterface weapon) {
+    weapon.equipThief(this);
+  }
+
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof final Thief that)) {
+    if (!(o instanceof Thief)) {
       return false;
     }
-    return hashCode() == that.hashCode()
-        && name.equals(that.name)
-        && maxHp == that.maxHp
-        && defense == that.defense;
-  }
-
-  public void equip(Weapon weapon) {
-    equippedWeapon = (Weapon) weapon.equipThief(this);
+    final Thief thief = (Thief) o;
+    return getName().equals(thief.getName())
+           && getMaxHp() == thief.getMaxHp()
+           && getDefense() == thief.getDefense();
   }
 
   @Override
   public String toString() {
-    return "Thief{maxHp=%d, defense=%d, name='%s'}".formatted(maxHp, defense, name);
+    return "Thief{name='%s', maxHp=%d, defense=%d}"
+            .formatted(getName(), getMaxHp(), getDefense());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(Thief.class, name, maxHp, defense);
+    return Objects.hash(Thief.class, getName(), getMaxHp(), getDefense());
   }
 }

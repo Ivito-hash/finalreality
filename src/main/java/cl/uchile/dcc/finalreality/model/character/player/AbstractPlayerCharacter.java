@@ -37,14 +37,17 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
    * Creates a new character.
    * This constructor is <b>protected</b>, because it'll only be used by subclasses.
    *
-   * @param name       the character's name
-   * @param maxHp      the character's max hp
-   * @param defense    the character's defense
-   * @param turnsQueue the queue with the characters waiting for their turn
+   * @param name
+   *     the character's name
+   * @param maxHp
+   *     the character's max hp
+   * @param defense
+   *     the character's defense
+   * @param turnsQueue
+   *     the queue with the characters waiting for their turn
    */
-  protected AbstractPlayerCharacter(@NotNull final String name, final int maxHp,
-                                    final int defense,
-                                    @NotNull final BlockingQueue<GameCharacter> turnsQueue)
+  protected AbstractPlayerCharacter(@NotNull String name, int maxHp, int defense,
+                                    @NotNull BlockingQueue<GameCharacter> turnsQueue)
           throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
     this.equippedWeapon = null;
@@ -69,9 +72,13 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   /**
    * Returns this player character's attack damage.
    */
-  @Override
+
   public int getDamageCharacter() {
-    return this.equippedWeapon.getDamage();
+    if (this.equippedWeapon == null) {
+      return 0;
+    } else {
+      return this.equippedWeapon.getDamage();
+    }
   }
 
   /**

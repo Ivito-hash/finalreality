@@ -10,11 +10,8 @@ package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
-import cl.uchile.dcc.finalreality.model.character.AbstractCharacter;
-import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
-import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractMageCharacter extends AbstractPlayerCharacter implements Mage {
 
-  protected final int maxMp;
+  protected  int maxMp;
   protected int currentMp;
 
   /**
@@ -48,8 +45,8 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
    * @param turnsQueue
    *     the queue with the characters waiting for their turn
    */
-  protected AbstractMageCharacter(final @NotNull String name, final int maxHp, int maxMp,
-          final int defense, final @NotNull BlockingQueue<GameCharacter> turnsQueue)
+  protected AbstractMageCharacter(@NotNull String name, int maxHp, int maxMp,
+          int defense, @NotNull BlockingQueue<GameCharacter> turnsQueue)
           throws InvalidStatValueException {
     super(name, maxHp, defense, turnsQueue);
     Require.statValueAtLeast(1, maxMp, "Max MP");
@@ -60,23 +57,23 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
   /**
    * Returns the character's current MP.
    */
-  protected int getCurrentMp() {
+  public int getCurrentMp() {
     return currentMp;
   }
 
   /**
    * Returns the character's max MP.
    */
-  protected int getMaxMp() {
+  public int getMaxMp() {
     return maxMp;
   }
 
   /**
-   * Sets the character's current MP.
+   * Set the character's current MP.
    */
-  public void setCurrentMp(int mp) throws InvalidStatValueException {
-    Require.statValueAtLeast(0, mp, "Current MP");
-    Require.statValueAtMost(maxMp, mp, "Current MP");
-    currentMp = mp;
+  public void setCurrentMp(int currentMp) throws InvalidStatValueException {
+    Require.statValueAtLeast(0, currentMp, "Current MP");
+    Require.statValueAtMost(maxMp, currentMp, "Current MP");
+    this.currentMp = currentMp;
   }
 }

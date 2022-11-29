@@ -10,11 +10,10 @@ package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
-import cl.uchile.dcc.finalreality.model.weapon.Weapon;
+import cl.uchile.dcc.finalreality.model.weapon.WeaponInterface;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
-
 
 /**
  * A {@link PlayerCharacter} that can equip {@code Axe}s and {@code Bow}s.
@@ -23,7 +22,6 @@ import org.jetbrains.annotations.NotNull;
  * @author ~Ivo Fuenzalida~
  */
 public class Engineer extends AbstractPlayerCharacter {
-
 
   /**
    * Creates a new engineer.
@@ -43,32 +41,32 @@ public class Engineer extends AbstractPlayerCharacter {
     super(name, maxHp, defense, turnsQueue);
   }
 
-  @Override
-  public boolean equals(final Object obj) {
-    if (this == obj) {
-      return true;
-    }
-    if (!(obj instanceof final Engineer that)) {
-      return false;
-    }
-    return hashCode() == that.hashCode()
-        && name.equals(that.name)
-        && maxHp == that.maxHp
-        && defense == that.defense;
+  public void equip(WeaponInterface weapon) {
+    weapon.equipEngineer(this);
   }
 
-  public void equip(Weapon weapon) {
-    equippedWeapon = (Weapon) weapon.equipEngineer(this);
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Engineer)) {
+      return false;
+    }
+    final Engineer engineer = (Engineer) o;
+    return getName().equals(engineer.getName())
+           && getMaxHp() == engineer.getMaxHp()
+           && getDefense() == engineer.getDefense();
   }
 
   @Override
   public String toString() {
-    return "Engineer{maxHp=%d, defense=%d, name='%s'}".formatted(maxHp, defense, name);
+    return "Engineer{name='%s', maxHp=%d, defense=%d}"
+            .formatted(getName(), getMaxHp(), getDefense());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(Engineer.class, name, maxHp, defense);
+    return Objects.hash(Engineer.class, getName(), getMaxHp(), getDefense());
   }
-
 }

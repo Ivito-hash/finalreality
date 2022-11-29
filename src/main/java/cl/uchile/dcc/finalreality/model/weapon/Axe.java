@@ -58,10 +58,9 @@ public class Axe extends Weapon {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof Axe)) {
+    if (!(o instanceof final Axe weapon)) {
       return false;
     }
-    final Axe weapon = (Axe) o;
     return getName().equals(weapon.getName())
             && getDamage() == weapon.getDamage()
             && getWeight() == weapon.getWeight();
@@ -69,7 +68,8 @@ public class Axe extends Weapon {
 
   @Override
   public String toString() {
-    return "Axe";
+    return "Axe{name='%s', damage=%d, weight=%d}"
+        .formatted(getName(), getDamage(), getWeight());
   }
 
   @Override

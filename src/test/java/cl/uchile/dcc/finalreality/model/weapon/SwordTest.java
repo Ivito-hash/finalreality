@@ -33,10 +33,10 @@ class SwordTest {
     @BeforeEach
     void setUp() throws InvalidStatValueException {
         /*===================================Weapons===================================*/
-        Broadsword = new Sword("Broad Sword", 12, 18, WeaponType.SWORD);
-        PracticeSword = new Sword("Broad Sword", 12, 18, WeaponType.SWORD);
-        BloodySword = new Sword("Bloody Sword", 20, 18, WeaponType.SWORD);
-        Excalibur = new Sword("Excalibur", 77, 41, WeaponType.SWORD);
+        Broadsword = new Sword("Broad Sword", 12, 18);
+        PracticeSword = new Sword("Broad Sword", 12, 18);
+        BloodySword = new Sword("Bloody Sword", 20, 18);
+        Excalibur = new Sword("Excalibur", 77, 41);
         /*=================================Characters=================================*/
         Vivi = new BlackMage("Vivi", 60, 48, 12, queue);
         Cid = new Engineer("Cid", 85, 18, queue);
@@ -46,80 +46,40 @@ class SwordTest {
     }
 
     @Test
+    void testGets() {
+        assertEquals(PracticeSword.getName(), Broadsword.getName());
+        assertEquals("Bloody Sword", BloodySword.getName());
+        assertNotEquals(Broadsword.getName(), Excalibur.getName());
+        assertNotEquals("Broad Sword", Excalibur.getName());
+        assertEquals(PracticeSword.getDamage(), Broadsword.getDamage());
+        assertEquals(20, BloodySword.getDamage());
+        assertNotEquals(Broadsword.getDamage(), Excalibur.getDamage());
+        assertNotEquals(20, Excalibur.getDamage());
+        assertEquals(PracticeSword.getWeight(), Broadsword.getWeight());
+        assertEquals(18, BloodySword.getWeight());
+        assertNotEquals(Broadsword.getWeight(), Excalibur.getWeight());
+        assertNotEquals(18, Excalibur.getWeight());
+    }
+
+    @Test
     void testEquals() {
         assertTrue(PracticeSword.equals(Broadsword));
         assertEquals(PracticeSword, Broadsword);
-        assertFalse(BloodySword.equals(Broadsword));
-        assertNotEquals(BloodySword, Broadsword);
-        assertFalse(Excalibur.equals(Broadsword));
-        assertNotEquals(Excalibur, Broadsword);
         assertFalse(Excalibur.equals(BloodySword));
         assertNotEquals(Excalibur, BloodySword);
     }
 
     @Test
     void testToString() {
-        assertEquals(Broadsword.toString(), "Sword{name='"+Broadsword.getName()+"', damage="+Broadsword.getDamage()+", weight="+Broadsword.getWeight()+", type="+Broadsword.getType()+"}");
-        assertEquals(PracticeSword.toString(), "Sword{name='"+PracticeSword.getName()+"', damage="+PracticeSword.getDamage()+", weight="+PracticeSword.getWeight()+", type="+PracticeSword.getType()+"}");
-        assertEquals(BloodySword.toString(), "Sword{name='"+BloodySword.getName()+"', damage="+BloodySword.getDamage()+", weight="+BloodySword.getWeight()+", type="+BloodySword.getType()+"}");
-        assertEquals(Excalibur.toString(), "Sword{name='"+Excalibur.getName()+"', damage="+Excalibur.getDamage()+", weight="+Excalibur.getWeight()+", type="+Excalibur.getType()+"}");
+        assertEquals(Broadsword.toString(), "Sword{name='"+Broadsword.getName()+"', damage="+Broadsword.getDamage()+", weight="+Broadsword.getWeight()+"}");
         assertEquals(PracticeSword.toString(), Broadsword.toString());
         assertNotEquals(Excalibur.toString(), BloodySword.toString());
     }
 
     @Test
     void testHashCode() {
-        assertEquals(Broadsword.hashCode(), Objects.hash(Sword.class, Broadsword.getName(), Broadsword.getDamage(), Broadsword.getWeight(), Broadsword.getType()));
-        assertEquals(PracticeSword.hashCode(), Objects.hash(Sword.class, PracticeSword.getName(), PracticeSword.getDamage(), PracticeSword.getWeight(), PracticeSword.getType()));
-        assertEquals(BloodySword.hashCode(), Objects.hash(Sword.class, BloodySword.getName(), BloodySword.getDamage(), BloodySword.getWeight(), BloodySword.getType()));
-        assertEquals(Excalibur.hashCode(), Objects.hash(Sword.class, Excalibur.getName(), Excalibur.getDamage(), Excalibur.getWeight(), Excalibur.getType()));
+        assertEquals(Broadsword.hashCode(), Objects.hash(Sword.class, Broadsword.getName(), Broadsword.getDamage(), Broadsword.getWeight()));
         assertEquals(Broadsword.hashCode(), PracticeSword.hashCode());
         assertNotEquals(Excalibur.hashCode(), BloodySword.hashCode());
-    }
-
-    @Test
-    void equipBlackMage() {
-        assertNull(Broadsword.equipBlackMage(Vivi));
-        assertNull(PracticeSword.equipBlackMage(Vivi));
-        assertNull(BloodySword.equipBlackMage(Vivi));
-        assertNull(Excalibur.equipBlackMage(Vivi));
-    }
-
-    @Test
-    void equipEngineer() {
-        assertNull(Broadsword.equipEngineer(Cid));
-        assertNull(PracticeSword.equipEngineer(Cid));
-        assertNull(BloodySword.equipEngineer(Cid));
-        assertNull(Excalibur.equipEngineer(Cid));
-    }
-
-    @Test
-    void equipKnight() {
-        assertNotNull(Broadsword.equipKnight(Steiner));
-        assertNotNull(PracticeSword.equipKnight(Steiner));
-        assertNotNull(BloodySword.equipKnight(Steiner));
-        assertNotNull(Excalibur.equipKnight(Steiner));
-        assertEquals(Broadsword, Broadsword.equipKnight(Steiner));
-        assertEquals(PracticeSword.equipKnight(Steiner), Broadsword.equipKnight(Steiner));
-        assertNotEquals(Excalibur.equipKnight(Steiner), BloodySword.equipKnight(Steiner));
-    }
-
-    @Test
-    void equipThief() {
-        assertNotNull(Broadsword.equipThief(Zidane));
-        assertNotNull(PracticeSword.equipThief(Zidane));
-        assertNotNull(BloodySword.equipThief(Zidane));
-        assertNotNull(Excalibur.equipThief(Zidane));
-        assertEquals(Broadsword, Broadsword.equipThief(Zidane));
-        assertEquals(PracticeSword.equipThief(Zidane), Broadsword.equipThief(Zidane));
-        assertNotEquals(Excalibur.equipThief(Zidane), BloodySword.equipThief(Zidane));
-    }
-
-    @Test
-    void equipWhiteMage() {
-        assertNull(Broadsword.equipWhiteMage(Garnet));
-        assertNull(PracticeSword.equipWhiteMage(Garnet));
-        assertNull(BloodySword.equipWhiteMage(Garnet));
-        assertNull(Excalibur.equipWhiteMage(Garnet));
     }
 }

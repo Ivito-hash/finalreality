@@ -10,7 +10,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
-import cl.uchile.dcc.finalreality.model.weapon.Weapon;
+import cl.uchile.dcc.finalreality.model.weapon.WeaponInterface;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
@@ -42,31 +42,32 @@ public class Knight extends AbstractPlayerCharacter {
     super(name, maxHp, defense, turnsQueue);
   }
 
-  @Override
-  public boolean equals(final Object obj) {
-    if (this == obj) {
-      return true;
-    }
-    if (!(obj instanceof final Knight that)) {
-      return false;
-    }
-    return hashCode() == that.hashCode()
-        && name.equals(that.name)
-        && maxHp == that.maxHp
-        && defense == that.defense;
+  public void equip(WeaponInterface weapon) {
+    weapon.equipKnight(this);
   }
 
-  public void equip(Weapon weapon) {
-    equippedWeapon = (Weapon) weapon.equipKnight(this);
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Knight)) {
+      return false;
+    }
+    final Knight knight = (Knight) o;
+    return getName().equals(knight.getName())
+           && getMaxHp() == knight.getMaxHp()
+           && getDefense() == knight.getDefense();
   }
 
   @Override
   public String toString() {
-    return "Knight{maxHp=%d, defense=%d, name='%s'}".formatted(maxHp, defense, name);
+    return "Knight{name='%s', maxHp=%d, defense=%d}"
+            .formatted(getName(), getMaxHp(), getDefense());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(Knight.class, name, maxHp, defense);
+    return Objects.hash(Knight.class, getName(), getMaxHp(), getDefense());
   }
 }

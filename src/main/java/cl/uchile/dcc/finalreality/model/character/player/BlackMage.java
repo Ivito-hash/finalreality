@@ -10,7 +10,7 @@ package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
-import cl.uchile.dcc.finalreality.model.weapon.Weapon;
+import cl.uchile.dcc.finalreality.model.weapon.WeaponInterface;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
@@ -43,33 +43,33 @@ public class BlackMage extends AbstractMageCharacter {
     super(name, maxHp, maxMp, defense, turnsQueue);
   }
 
+  public void equip(WeaponInterface weapon) {
+    weapon.equipBlackMage(this);
+  }
+
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof final BlackMage that)) {
+    if (!(o instanceof BlackMage)) {
       return false;
     }
-    return hashCode() == that.hashCode()
-        && name.equals(that.name)
-        && maxHp == that.maxHp
-        && maxMp == that.maxMp
-        && defense == that.defense;
-  }
-
-  public void equip(Weapon weapon) {
-    equippedWeapon = (Weapon) weapon.equipBlackMage(this);
+    final BlackMage blackmage = (BlackMage) o;
+    return getName().equals(blackmage.getName())
+           && getMaxHp() == blackmage.getMaxHp()
+           && getMaxMp() == blackmage.getMaxMp()
+           && getDefense() == blackmage.getDefense();
   }
 
   @Override
   public String toString() {
-    return "BlackMage{maxHp=%d, maxMp=%d, defense=%d, name='%s'}"
-        .formatted(maxHp, maxMp, defense, name);
+    return "BlackMage{name='%s', maxHp=%d, maxMp=%d, defense=%d}"
+        .formatted(getName(), getMaxHp(), getMaxMp(), getDefense());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(BlackMage.class, name, maxHp, maxMp, defense);
+    return Objects.hash(BlackMage.class, getName(), getMaxHp(), getMaxMp(), getDefense());
   }
 }

@@ -46,80 +46,38 @@ class AxeTest {
     }
 
     @Test
+    void testGets() {
+        assertEquals(MithrilJavelin.getName(), Javelin.getName());
+        assertEquals("Partisane", Partisane.getName());
+        assertNotEquals(Javelin.getName(), Obelisk.getName());
+        assertNotEquals("Javelin", Obelisk.getName());
+        assertEquals(MithrilJavelin.getDamage(), Javelin.getDamage());
+        assertEquals(25, Partisane.getDamage());
+        assertNotEquals(Javelin.getDamage(), Obelisk.getDamage());
+        assertNotEquals(25, Obelisk.getDamage());
+        assertEquals(MithrilJavelin.getWeight(), Javelin.getWeight());
+        assertEquals(20, Partisane.getWeight());
+        assertNotEquals(Javelin.getWeight(), Obelisk.getWeight());
+        assertNotEquals(20, Obelisk.getWeight());
+    }
+
+    @Test
     void testEquals() {
-        assertTrue(MithrilJavelin.equals(Javelin));
         assertEquals(MithrilJavelin, Javelin);
-        assertFalse(Partisane.equals(Javelin));
-        assertNotEquals(Partisane, Javelin);
-        assertFalse(Obelisk.equals(Javelin));
-        assertNotEquals(Obelisk, Javelin);
-        assertFalse(Obelisk.equals(Partisane));
-        assertNotEquals(Obelisk, Partisane);
+        assertNotEquals(Partisane, Obelisk);
     }
 
     @Test
     void testToString() {
-        assertEquals(Javelin.toString(), "Axe{name='"+Javelin.getName()+"', damage="+Javelin.getDamage()+", weight="+Javelin.getWeight()+", type="+Javelin.getType()+"}");
-        assertEquals(MithrilJavelin.toString(), "Axe{name='"+MithrilJavelin.getName()+"', damage="+MithrilJavelin.getDamage()+", weight="+MithrilJavelin.getWeight()+", type="+MithrilJavelin.getType()+"}");
-        assertEquals(Partisane.toString(), "Axe{name='"+Partisane.getName()+"', damage="+Partisane.getDamage()+", weight="+Partisane.getWeight()+", type="+Partisane.getType()+"}");
-        assertEquals(Obelisk.toString(), "Axe{name='"+Obelisk.getName()+"', damage="+Obelisk.getDamage()+", weight="+Obelisk.getWeight()+", type="+Obelisk.getType()+"}");
+        assertEquals(Javelin.toString(), "Axe{name='"+Javelin.getName()+"', damage="+Javelin.getDamage()+", weight="+Javelin.getWeight()+"}");
         assertEquals(MithrilJavelin.toString(), Javelin.toString());
         assertNotEquals(Obelisk.toString(), Partisane.toString());
     }
 
     @Test
     void testHashCode() {
-        assertEquals(Javelin.hashCode(), Objects.hash(Axe.class, Javelin.getName(), Javelin.getDamage(), Javelin.getWeight(), Javelin.getType()));
-        assertEquals(MithrilJavelin.hashCode(), Objects.hash(Axe.class, MithrilJavelin.getName(), MithrilJavelin.getDamage(), MithrilJavelin.getWeight(), MithrilJavelin.getType()));
-        assertEquals(Partisane.hashCode(), Objects.hash(Axe.class, Partisane.getName(), Partisane.getDamage(), Partisane.getWeight(), Partisane.getType()));
-        assertEquals(Obelisk.hashCode(), Objects.hash(Axe.class, Obelisk.getName(), Obelisk.getDamage(), Obelisk.getWeight(), Obelisk.getType()));
+        assertEquals(Javelin.hashCode(), Objects.hash(Axe.class, Javelin.getName(), Javelin.getDamage(), Javelin.getWeight()));
         assertEquals(Javelin.hashCode(), MithrilJavelin.hashCode());
         assertNotEquals(Obelisk.hashCode(), Partisane.hashCode());
-    }
-
-    @Test
-    void equipBlackMage() {
-        assertNull(Javelin.equipBlackMage(Vivi));
-        assertNull(MithrilJavelin.equipBlackMage(Vivi));
-        assertNull(Partisane.equipBlackMage(Vivi));
-        assertNull(Obelisk.equipBlackMage(Vivi));
-    }
-
-    @Test
-    void equipEngineer() {
-        assertNotNull(Javelin.equipEngineer(Cid));
-        assertNotNull(MithrilJavelin.equipEngineer(Cid));
-        assertNotNull(Partisane.equipEngineer(Cid));
-        assertNotNull(Obelisk.equipEngineer(Cid));
-        assertEquals(Javelin, Javelin.equipEngineer(Cid));
-        assertEquals(MithrilJavelin.equipEngineer(Cid), Javelin.equipEngineer(Cid));
-        assertNotEquals(Obelisk.equipEngineer(Cid), Partisane.equipEngineer(Cid));
-    }
-
-    @Test
-    void equipKnight() {
-        assertNotNull(Javelin.equipKnight(Steiner));
-        assertNotNull(MithrilJavelin.equipKnight(Steiner));
-        assertNotNull(Partisane.equipKnight(Steiner));
-        assertNotNull(Obelisk.equipKnight(Steiner));
-        assertEquals(Javelin, Javelin.equipKnight(Steiner));
-        assertEquals(MithrilJavelin.equipKnight(Steiner), Javelin.equipKnight(Steiner));
-        assertNotEquals(Obelisk.equipKnight(Steiner), Partisane.equipKnight(Steiner));
-    }
-
-    @Test
-    void equipThief() {
-        assertNull(Javelin.equipThief(Zidane));
-        assertNull(MithrilJavelin.equipThief(Zidane));
-        assertNull(Partisane.equipThief(Zidane));
-        assertNull(Obelisk.equipThief(Zidane));
-    }
-
-    @Test
-    void equipWhiteMage() {
-        assertNull(Javelin.equipWhiteMage(Garnet));
-        assertNull(MithrilJavelin.equipWhiteMage(Garnet));
-        assertNull(Partisane.equipWhiteMage(Garnet));
-        assertNull(Obelisk.equipWhiteMage(Garnet));
     }
 }

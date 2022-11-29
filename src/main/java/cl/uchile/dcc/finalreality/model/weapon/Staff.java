@@ -72,10 +72,9 @@ public class Staff extends Weapon {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof Staff)) {
+    if (!(o instanceof final Staff weapon)) {
       return false;
     }
-    final Staff weapon = (Staff) o;
     return getName().equals(weapon.getName())
             && getDamage() == weapon.getDamage()
             && getWeight() == weapon.getWeight();
@@ -83,11 +82,12 @@ public class Staff extends Weapon {
 
   @Override
   public String toString() {
-    return "Staff";
+    return "Staff{name='%s', damage=%d, magic=%d, weight=%d}"
+            .formatted(getName(), getDamage(), getMagic(), getWeight());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(Staff.class, getName(), getDamage(), getWeight());
+    return Objects.hash(Staff.class, getName(), getDamage(), getMagic(), getWeight());
   }
 }

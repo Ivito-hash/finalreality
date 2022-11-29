@@ -34,11 +34,11 @@ class AbstractPlayerCharacterTest {
     @BeforeEach
     void setUp() throws InvalidStatValueException {
         /*===================================Weapons===================================*/
-        ShortBow = new Bow("Short Bow", 10, 20, WeaponType.BOW);
-        Dagger = new Knife("Dagger", 12, 10, WeaponType.KNIFE);
-        Rod = new Staff("Rod", 11, 23, 30, WeaponType.STAFF);
-        Broadsword = new Sword("Broad Sword", 12, 40, WeaponType.SWORD);
-        OakRod = new Staff("Oak Rod", 16, 42, 50, WeaponType.STAFF);
+        ShortBow = new Bow("Short Bow", 10, 20);
+        Dagger = new Knife("Dagger", 16, 10);
+        Rod = new Staff("Rod", 11, 23, 30);
+        Broadsword = new Sword("Broad Sword", 24, 40);
+        OakRod = new Staff("Oak Rod", 16, 42, 50);
         /*=================================Characters=================================*/
         Vivi = new BlackMage("Vivi", 60, 48, 12, queue);
         Cid = new Engineer("Cid", 85, 18, queue);
@@ -52,12 +52,21 @@ class AbstractPlayerCharacterTest {
         Zidane.equip(Dagger);
         Garnet.equip(Rod);
         /*===================================QUEUE===================================*/
-        nombres = new ArrayList<String>();
+        nombres = new ArrayList<>();
         nombres.add("Zidane");
         nombres.add("Cid");
         nombres.add("Garnet");
         nombres.add("Steiner");
         nombres.add("Vivi");
+    }
+
+    @Test
+    void getDamageCharacter() {
+        assertNotEquals(Steiner.getDamageCharacter(), Vivi.getDamageCharacter());
+        Vivi.equip(OakRod);
+        assertEquals(Zidane.getDamageCharacter(), Vivi.getDamageCharacter());
+        assertEquals(Steiner.getDamageCharacter(), Broadsword.getDamage());
+        assertNotEquals(Cid.getDamageCharacter(), Dagger.getDamage());
     }
 
     @Test
@@ -81,7 +90,7 @@ class AbstractPlayerCharacterTest {
         Garnet.waitTurn();
         // Waits for 6 seconds to ensure that all characters have finished waiting
         Thread.sleep(6000);
-        cola = new ArrayList<String>();
+        cola = new ArrayList<>();
         while (!queue.isEmpty()) {
             // Pops and prints the names of the characters of the queue to illustrate the turns
             // order

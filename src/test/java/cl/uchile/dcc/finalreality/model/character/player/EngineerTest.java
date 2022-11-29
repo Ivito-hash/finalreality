@@ -5,7 +5,6 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -33,33 +32,40 @@ class EngineerTest {
         Shido = new Engineer("Cid", 85, 18, queue);
         Barret = new Engineer("Barret", 100, 20, queue);
         /*===================================Weapons===================================*/
-        Javelin = new Axe("Javelin", 18, 20, WeaponType.AXE);
-        ShortBow = new Bow("Short Bow", 10, 10, WeaponType.BOW);
-        Dagger = new Knife("Dagger", 12, 23, WeaponType.KNIFE);
-        Rod = new Staff("Rod", 11, 23, 21, WeaponType.STAFF);
-        Broadsword = new Sword("Broad Sword", 12, 18, WeaponType.SWORD);
-    }
-
-    @Test
-    void testEquals() {
-        assertTrue(Shido.equals(Cid));
-        assertEquals(Shido, Cid);
-        assertFalse(Barret.equals(Cid));
-        assertNotEquals(Barret, Cid);
+        Javelin = new Axe("Javelin", 18, 20);
+        ShortBow = new Bow("Short Bow", 10, 10);
+        Dagger = new Knife("Dagger", 12, 23);
+        Rod = new Staff("Rod", 11, 23, 21);
+        Broadsword = new Sword("Broad Sword", 12, 18);
     }
 
     @Test
     void equip() {
+        assertNull(Cid.getEquippedWeapon());
+        Cid.equip(Javelin);
+        assertNull(Shido.getEquippedWeapon());
+        Shido.equip(ShortBow);
+        assertNotEquals(Cid.getEquippedWeapon(), Shido.getEquippedWeapon());
         Cid.equip(ShortBow);
-        assertEquals(ShortBow.equipEngineer(Cid), Cid.equippedWeapon);
-        assertNotEquals(Javelin.equipEngineer(Cid), Cid.equippedWeapon);
+        assertEquals(Cid.getEquippedWeapon(), Shido.getEquippedWeapon());
+        Cid.equip(Rod);
+        assertNull(Cid.getEquippedWeapon());
+        assertNotEquals(Cid.getEquippedWeapon(), Shido.getEquippedWeapon());
+        Cid.equip(Broadsword);
+        assertNull(Cid.getEquippedWeapon());
+        Shido.equip(Dagger);
+        assertEquals(Cid.getEquippedWeapon(), Shido.getEquippedWeapon());
+    }
+
+    @Test
+    void testEquals() {
+        assertEquals(Shido, Cid);
+        assertNotEquals(Barret, Cid);
     }
 
     @Test
     void testToString() {
-        assertEquals(Cid.toString(), "Engineer{maxHp="+Cid.getMaxHp()+", defense="+Cid.getDefense()+", name='"+Cid.getName()+"'}");
-        assertEquals(Shido.toString(), "Engineer{maxHp="+Shido.getMaxHp()+", defense="+Shido.getDefense()+", name='"+Shido.getName()+"'}");
-        assertEquals(Barret.toString(), "Engineer{maxHp="+Barret.getMaxHp()+", defense="+Barret.getDefense()+", name='"+Barret.getName()+"'}");
+        assertEquals(Cid.toString(), "Engineer{name='"+Cid.getName()+"', maxHp="+Cid.getMaxHp()+", defense="+Cid.getDefense()+"}");
         assertEquals(Shido.toString(), Cid.toString());
         assertNotEquals(Barret.toString(), Cid.toString());
     }
@@ -67,8 +73,6 @@ class EngineerTest {
     @Test
     void testHashCode() {
         assertEquals(Cid.hashCode(), Objects.hash(Engineer.class, Cid.getName(), Cid.getMaxHp(), Cid.getDefense()));
-        assertEquals(Shido.hashCode(), Objects.hash(Engineer.class, Shido.getName(), Shido.getMaxHp(), Shido.getDefense()));
-        assertEquals(Barret.hashCode(), Objects.hash(Engineer.class, Barret.getName(), Barret.getMaxHp(), Barret.getDefense()));
         assertEquals(Cid.hashCode(), Shido.hashCode());
         assertNotEquals(Barret.hashCode(), Cid.hashCode());
     }

@@ -80,13 +80,13 @@ public class Enemy extends AbstractCharacter {
 
   @Override
   public String toString() {
-    return "Enemy{name='%s', currentHp=%d, defense=%d, damage=%d, weight=%d}"
-            .formatted(getName(), getCurrentHp(), getDefense(), getDamage(), getWeight());
+    return "Enemy{name='%s', maxHp=%d, defense=%d, damage=%d, weight=%d}"
+            .formatted(getName(), getMaxHp(), getDefense(), getDamage(), getWeight());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(Enemy.class, getName(), getDefense(), getDamage(), getWeight());
+    return Objects.hash(Enemy.class, getName(), getMaxHp(), getDefense(), getDamage(), getWeight());
   }
 
   /**

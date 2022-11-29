@@ -13,8 +13,6 @@ import cl.uchile.dcc.finalreality.model.weapon.Bow;
 import cl.uchile.dcc.finalreality.model.weapon.Knife;
 import cl.uchile.dcc.finalreality.model.weapon.Staff;
 import cl.uchile.dcc.finalreality.model.weapon.Sword;
-import cl.uchile.dcc.finalreality.model.weapon.WeaponInterface;
-import cl.uchile.dcc.finalreality.model.weapon.WeaponType;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -41,14 +39,14 @@ public class main {
     final Knight Freya = new Knight("Freya", 100, 20, queue);
     final Engineer Cid = new Engineer("Cid", 85, 18, queue);
     /*======================Weapons======================*/
-    final Knife Dagger = new Knife("Dagger", 12, 10, WeaponType.KNIFE);
-    final Staff MageStaff = new Staff("Mage Staff", 12, 24, 16, WeaponType.STAFF);
-    final Staff Rod = new Staff("Rod", 11, 20, 30, WeaponType.STAFF);
-    final Sword Broadsword = new Sword("Broadsword", 40, 40, WeaponType.SWORD);
-    final Axe Javelin = new Axe("Javelin", 18, 20, WeaponType.AXE);
-    final Staff GolemFlute = new Staff("Golem's Flute", 17, 21, 19, WeaponType.STAFF);
-    final Bow ShortBow = new Bow("Shortbow", 10, 20, WeaponType.BOW);
-    final Staff OakRod = new Staff("Oak Rod", 16, 42, 50, WeaponType.STAFF);
+    final Knife Dagger = new Knife("Dagger", 12, 10);
+    final Staff MageStaff = new Staff("Mage Staff", 12, 24, 16);
+    final Staff Rod = new Staff("Rod", 11, 20, 30);
+    final Sword Broadsword = new Sword("Broadsword", 40, 40);
+    final Axe Javelin = new Axe("Javelin", 18, 20);
+    final Staff GolemFlute = new Staff("Golem's Flute", 17, 21, 19);
+    final Bow ShortBow = new Bow("Shortbow", 10, 20);
+    final Staff OakRod = new Staff("Oak Rod", 16, 42, 50);
     /*======================Equipment======================*/
     Vivi.equip(OakRod);
     Cid.equip(ShortBow);

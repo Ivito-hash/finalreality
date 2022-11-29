@@ -33,10 +33,10 @@ class KnifeTest {
     @BeforeEach
     void setUp() throws InvalidStatValueException {
         /*===================================Weapons===================================*/
-        Dagger = new Knife("Dagger", 12, 23, WeaponType.KNIFE);
-        MithrilDagger = new Knife("Dagger", 12, 23, WeaponType.KNIFE);
-        ButterflyDagger = new Knife("Butterfly Dagger", 16, 23, WeaponType.KNIFE);
-        Masamune = new Knife("Masamune", 62, 47, WeaponType.KNIFE);
+        Dagger = new Knife("Dagger", 12, 23);
+        MithrilDagger = new Knife("Dagger", 12, 23);
+        ButterflyDagger = new Knife("Butterfly Dagger", 16, 23);
+        Masamune = new Knife("Masamune", 62, 47);
         /*=================================Characters=================================*/
         Vivi = new BlackMage("Vivi", 60, 48, 12, queue);
         Cid = new Engineer("Cid", 85, 18, queue);
@@ -46,84 +46,41 @@ class KnifeTest {
     }
 
     @Test
+    void testGets() {
+        assertEquals(MithrilDagger.getName(), Dagger.getName());
+        assertEquals("Butterfly Dagger", ButterflyDagger.getName());
+        assertNotEquals(Dagger.getName(), Masamune.getName());
+        assertNotEquals("Dagger", Masamune.getName());
+        assertEquals(MithrilDagger.getDamage(), Dagger.getDamage());
+        assertEquals(16, ButterflyDagger.getDamage());
+        assertNotEquals(Dagger.getDamage(), Masamune.getDamage());
+        assertNotEquals(16, Masamune.getDamage());
+        assertEquals(MithrilDagger.getWeight(), Dagger.getWeight());
+        assertEquals(23, ButterflyDagger.getWeight());
+        assertNotEquals(Dagger.getWeight(), Masamune.getWeight());
+        assertNotEquals(23, Masamune.getWeight());
+    }
+
+    @Test
     void testEquals() {
-        assertTrue(MithrilDagger.equals(Dagger));
         assertEquals(MithrilDagger, Dagger);
-        assertFalse(ButterflyDagger.equals(Dagger));
-        assertNotEquals(ButterflyDagger, Dagger);
-        assertFalse(Masamune.equals(Dagger));
-        assertNotEquals(Masamune, Dagger);
-        assertFalse(Masamune.equals(ButterflyDagger));
         assertNotEquals(Masamune, ButterflyDagger);
     }
 
     @Test
     void testToString() {
-        assertEquals(Dagger.toString(), "Knife{name='" + Dagger.getName() + "', damage=" + Dagger.getDamage() + ", weight=" + Dagger.getWeight() + ", type=" + Dagger.getType() + "}");
-        assertEquals(MithrilDagger.toString(), "Knife{name='" + MithrilDagger.getName() + "', damage=" + MithrilDagger.getDamage() + ", weight=" + MithrilDagger.getWeight() + ", type=" + MithrilDagger.getType() + "}");
-        assertEquals(ButterflyDagger.toString(), "Knife{name='" + ButterflyDagger.getName() + "', damage=" + ButterflyDagger.getDamage() + ", weight=" + ButterflyDagger.getWeight() + ", type=" + ButterflyDagger.getType() + "}");
-        assertEquals(Masamune.toString(), "Knife{name='" + Masamune.getName() + "', damage=" + Masamune.getDamage() + ", weight=" + Masamune.getWeight() + ", type=" + Masamune.getType() + "}");
+        assertEquals(Dagger.toString(), "Knife{name='"+Dagger.getName()+"', damage="+Dagger.getDamage()+", weight="+Dagger.getWeight()+"}");
+        assertNotEquals(Masamune.toString(), "Knife{name='"+Dagger.getName()+"', damage="+MithrilDagger.getDamage()+", weight="+ButterflyDagger.getWeight()+"}");
         assertEquals(MithrilDagger.toString(), Dagger.toString());
         assertNotEquals(Masamune.toString(), ButterflyDagger.toString());
+        assertNotNull(Dagger.toString());
     }
 
     @Test
 
     void testHashCode() {
-        assertEquals(Dagger.hashCode(), Objects.hash(Knife.class, Dagger.getName(), Dagger.getDamage(), Dagger.getWeight(), Dagger.getType()));
-        assertEquals(MithrilDagger.hashCode(), Objects.hash(Knife.class, MithrilDagger.getName(), MithrilDagger.getDamage(), MithrilDagger.getWeight(), MithrilDagger.getType()));
-        assertEquals(ButterflyDagger.hashCode(), Objects.hash(Knife.class, ButterflyDagger.getName(), ButterflyDagger.getDamage(), ButterflyDagger.getWeight(), ButterflyDagger.getType()));
-        assertEquals(Masamune.hashCode(), Objects.hash(Knife.class, Masamune.getName(), Masamune.getDamage(), Masamune.getWeight(), Masamune.getType()));
+        assertEquals(Dagger.hashCode(), Objects.hash(Knife.class, Dagger.getName(), Dagger.getDamage(), Dagger.getWeight()));
         assertEquals(Dagger.hashCode(), MithrilDagger.hashCode());
         assertNotEquals(Masamune.hashCode(), ButterflyDagger.hashCode());
-    }
-
-    @Test
-    void equipBlackMage() {
-        assertNotNull(Dagger.equipBlackMage(Vivi));
-        assertNotNull(MithrilDagger.equipBlackMage(Vivi));
-        assertNotNull(ButterflyDagger.equipBlackMage(Vivi));
-        assertNotNull(Masamune.equipBlackMage(Vivi));
-        assertEquals(Dagger, Dagger.equipBlackMage(Vivi));
-        assertEquals(MithrilDagger.equipBlackMage(Vivi), Dagger.equipBlackMage(Vivi));
-        assertNotEquals(Masamune.equipBlackMage(Vivi), ButterflyDagger.equipBlackMage(Vivi));
-    }
-
-    @Test
-    void equipEngineer() {
-        assertNull(Dagger.equipEngineer(Cid));
-        assertNull(MithrilDagger.equipEngineer(Cid));
-        assertNull(ButterflyDagger.equipEngineer(Cid));
-        assertNull(Masamune.equipEngineer(Cid));
-    }
-
-    @Test
-    void equipKnight() {
-        assertNotNull(Dagger.equipKnight(Steiner));
-        assertNotNull(MithrilDagger.equipKnight(Steiner));
-        assertNotNull(ButterflyDagger.equipKnight(Steiner));
-        assertNotNull(Masamune.equipKnight(Steiner));
-        assertEquals(Dagger, Dagger.equipKnight(Steiner));
-        assertEquals(MithrilDagger.equipKnight(Steiner), Dagger.equipKnight(Steiner));
-        assertNotEquals(Masamune.equipKnight(Steiner), ButterflyDagger.equipKnight(Steiner));
-    }
-
-    @Test
-    void equipThief() {
-        assertNotNull(Dagger.equipThief(Zidane));
-        assertNotNull(MithrilDagger.equipThief(Zidane));
-        assertNotNull(ButterflyDagger.equipThief(Zidane));
-        assertNotNull(Masamune.equipThief(Zidane));
-        assertEquals(Dagger, Dagger.equipThief(Zidane));
-        assertEquals(MithrilDagger.equipThief(Zidane), Dagger.equipThief(Zidane));
-        assertNotEquals(Masamune.equipThief(Zidane), ButterflyDagger.equipThief(Zidane));
-    }
-
-    @Test
-    void equipWhiteMage() {
-        assertNull(Dagger.equipWhiteMage(Garnet));
-        assertNull(MithrilDagger.equipWhiteMage(Garnet));
-        assertNull(ButterflyDagger.equipWhiteMage(Garnet));
-        assertNull(Masamune.equipWhiteMage(Garnet));
     }
 }
