@@ -10,5 +10,7 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
  * @author ~Ivo Fuenzalida~
  */
 public interface SpellFactory {
-    SpellInterface create();
+    static SpellInterface create() {
+        return null;
+    }
 }

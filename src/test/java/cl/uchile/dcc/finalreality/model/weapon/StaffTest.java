@@ -59,10 +59,10 @@ class StaffTest {
         assertEquals(21, WitchWand.getWeight());
         assertNotEquals(Rod.getWeight(), OakRod.getWeight());
         assertNotEquals(21, OakRod.getWeight());
-        assertEquals(MageStaff.getMagic(), Rod.getMagic());
-        assertEquals(30, WitchWand.getMagic());
-        assertNotEquals(Rod.getMagic(), OakRod.getMagic());
-        assertNotEquals(30, OakRod.getMagic());
+        assertEquals(MageStaff.getMagicDamage(), Rod.getMagicDamage());
+        assertEquals(30, WitchWand.getMagicDamage());
+        assertNotEquals(Rod.getMagicDamage(), OakRod.getMagicDamage());
+        assertNotEquals(30, OakRod.getMagicDamage());
     }
 
     @Test
@@ -73,14 +73,14 @@ class StaffTest {
 
     @Test
     void testToString() {
-        assertEquals(Rod.toString(), "Staff{name='"+Rod.getName()+"', damage="+Rod.getDamage()+", magic="+Rod.getMagic()+", weight="+Rod.getWeight()+"}");
+        assertEquals(Rod.toString(), "Staff{name='"+Rod.getName()+"', damage="+Rod.getDamage()+", magic="+Rod.getMagicDamage()+", weight="+Rod.getWeight()+"}");
         assertEquals(MageStaff.toString(), Rod.toString());
         assertNotEquals(OakRod.toString(), WitchWand.toString());
     }
 
     @Test
     void testHashCode() {
-        assertEquals(Rod.hashCode(), Objects.hash(Staff.class, Rod.getName(), Rod.getDamage(), Rod.getMagic(), Rod.getWeight()));
+        assertEquals(Rod.hashCode(), Objects.hash(Staff.class, Rod.getName(), Rod.getDamage(), Rod.getMagicDamage(), Rod.getWeight()));
         assertEquals(Rod.hashCode(), MageStaff.hashCode());
         assertNotEquals(OakRod.hashCode(), WitchWand.hashCode());
     }

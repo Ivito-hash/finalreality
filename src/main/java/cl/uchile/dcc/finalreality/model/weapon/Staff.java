@@ -47,7 +47,8 @@ public class Staff extends Weapon {
   /**
    * Returns the ability damage to the weapon.
    */
-  public int getMagic() {
+  @Override
+  public int getMagicDamage() {
     return magic;
   }
 
@@ -83,11 +84,11 @@ public class Staff extends Weapon {
   @Override
   public String toString() {
     return "Staff{name='%s', damage=%d, magic=%d, weight=%d}"
-            .formatted(getName(), getDamage(), getMagic(), getWeight());
+            .formatted(getName(), getDamage(), getMagicDamage(), getWeight());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(Staff.class, getName(), getDamage(), getMagic(), getWeight());
+    return Objects.hash(Staff.class, getName(), getDamage(), getMagicDamage(), getWeight());
   }
 }

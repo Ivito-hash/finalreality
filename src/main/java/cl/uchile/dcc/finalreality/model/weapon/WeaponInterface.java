@@ -31,6 +31,11 @@ public interface WeaponInterface {
   int getWeight();
 
   /**
+   * Returns the magic damage to the weapon.
+   */
+  int getMagicDamage();
+
+  /**
    * method [equipBlackMage] equip weapon to a Black Mage.
    */
   void equipBlackMage(BlackMage blackmage);

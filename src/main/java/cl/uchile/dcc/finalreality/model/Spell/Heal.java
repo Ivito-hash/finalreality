@@ -1,5 +1,6 @@
 package cl.uchile.dcc.finalreality.model.Spell;
 
+import cl.uchile.dcc.finalreality.controller.State.Normal;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import static java.lang.Math.min;

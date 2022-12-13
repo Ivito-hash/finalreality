@@ -1,6 +1,8 @@
 package cl.uchile.dcc.finalreality.model.character;
 
 import java.beans.PropertyChangeSupport;
+
+import cl.uchile.dcc.finalreality.controller.State.State;
 import cl.uchile.dcc.finalreality.controller.eventHandler.Handler;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
@@ -25,6 +27,7 @@ public abstract class AbstractCharacter implements GameCharacter {
   private final PropertyChangeSupport characterDeathEvent;
   private final PropertyChangeSupport addToQueueEvent;
   protected boolean isAlive;
+  private State state;
 
   /**
    * Creates a new character.
@@ -92,6 +95,47 @@ public abstract class AbstractCharacter implements GameCharacter {
     Require.statValueAtLeast(0, hp, "Current HP");
     Require.statValueAtMost(maxHp, hp, "Current HP");
     currentHp = hp;
+  }
+
+  public void setState(State state) {
+    this.state = state;
+    this.state.setGameCharacter(this);
+  }
+
+  public State getState() {
+    return this.state;
+  }
+
+  public void burn() {
+    state.burn();
+  }
+
+  public void normal() {
+    state.normal();
+  }
+
+  public void paralize() {
+    state.paralize();
+  }
+
+  public void poisoned() {
+    state.poisoned();
+  }
+
+  public boolean isBurn() {
+    return state.isBurn();
+  }
+
+  public boolean isNormal() {
+    return state.isNormal();
+  }
+
+  public boolean isParalize() {
+    return state.isParalize();
+  }
+
+  public boolean isPoisoned() {
+    return state.isPoisoned();
   }
 
   /**

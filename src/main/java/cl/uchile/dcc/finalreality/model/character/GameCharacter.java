@@ -1,5 +1,6 @@
 package cl.uchile.dcc.finalreality.model.character;
 
+import cl.uchile.dcc.finalreality.controller.State.State;
 import cl.uchile.dcc.finalreality.controller.eventHandler.Handler;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 
@@ -87,4 +88,15 @@ public interface GameCharacter {
    * (the subscriber is the addToQueueHandler)
    */
   void addSubscriberForAddToQueue(Handler addToQueueHandler);
+
+  void setState(State state);
+  State getState();
+  void burn();
+  void normal();
+  void poisoned();
+  void paralize();
+  boolean isBurn();
+  boolean isNormal();
+  boolean isParalize();
+  boolean isPoisoned();
 }

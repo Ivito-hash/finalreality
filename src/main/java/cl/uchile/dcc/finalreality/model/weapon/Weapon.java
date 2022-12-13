@@ -53,6 +53,14 @@ public abstract class Weapon implements WeaponInterface {
     return weight;
   }
 
+  /**
+   * Returns the magic damage to the weapon.
+   */
+  @Override
+  public int getMagicDamage() {
+    return 0;
+  }
+
   @Override
   public void equipBlackMage(BlackMage blackmage) {
     blackmage.setEquippedWeapon(null);

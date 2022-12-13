@@ -10,9 +10,13 @@ package cl.uchile.dcc.finalreality.model.character.player;
 
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
+import cl.uchile.dcc.finalreality.model.Spell.Factory.SpellFactory;
+import cl.uchile.dcc.finalreality.model.Spell.SpellInterface;
 import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.Weapon;
 import java.util.concurrent.BlockingQueue;
+
+import cl.uchile.dcc.finalreality.model.weapon.WeaponInterface;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -30,6 +34,7 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
 
   protected  int maxMp;
   protected int currentMp;
+  private SpellFactory spellFactory;
 
   /**
    * Creates a new Mage.
@@ -75,5 +80,30 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
     Require.statValueAtLeast(0, currentMp, "Current MP");
     Require.statValueAtMost(maxMp, currentMp, "Current MP");
     this.currentMp = currentMp;
+  }
+
+  /**
+   * Set the factory spell.
+   */
+  public void setFactory(SpellFactory spellFactory) {
+    this.spellFactory = spellFactory;
+  }
+
+  /**
+   * Get the factory spell.
+   */
+  public SpellFactory getFactory() {
+    return this.spellFactory;
+  }
+
+  /**
+   * Cast a spell from a Mage to another GameCharacter.
+   */
+  public void castSpell(GameCharacter gameCharacter) throws InvalidStatValueException {
+    SpellInterface spell = SpellFactory.create();
+    WeaponInterface weapon = getEquippedWeapon();
+    int dealtDamage = weapon.getMagicDamage();
+    int mp = spell.cast(gameCharacter, dealtDamage);
+    setCurrentMp(getCurrentMp() - mp);
   }
 }

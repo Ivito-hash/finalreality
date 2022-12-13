@@ -6,7 +6,7 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 public class Poison implements SpellInterface {
     @Override
     public int cast(GameCharacter gameCharacter, int dealtDamage)  {
-        gameCharacter.poison();
+        gameCharacter.poisoned();
         return 45;
     }
 }
