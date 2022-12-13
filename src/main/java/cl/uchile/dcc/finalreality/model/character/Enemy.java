@@ -89,6 +89,11 @@ public class Enemy extends AbstractCharacter {
     return Objects.hash(Enemy.class, getName(), getMaxHp(), getDefense(), getDamage(), getWeight());
   }
 
+  @Override
+  public int turnType() {
+    return 0;
+  }
+
   /**
    * Create the standby instance of the character.
    */
@@ -99,5 +104,18 @@ public class Enemy extends AbstractCharacter {
               /* command = */ this::addToQueue,
               /* delay = */ getWeight() / 10,
               /* unit = */ TimeUnit.SECONDS);
+  }
+
+  /**
+   * Returns this enemy's attack damage depending on their state.
+   */
+  @Override
+  public int getDamageCharacter() {
+    if (!this.isAlive()) {
+      return 0;
+    }
+    else {
+      return this.getDamage();
+    }
   }
 }

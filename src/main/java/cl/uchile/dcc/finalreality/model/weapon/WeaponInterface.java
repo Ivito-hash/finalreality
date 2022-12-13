@@ -31,7 +31,7 @@ public interface WeaponInterface {
   int getWeight();
 
   /**
-   * method [equipBlackMage] equip weaponto a Black Mage.
+   * method [equipBlackMage] equip weapon to a Black Mage.
    */
   void equipBlackMage(BlackMage blackmage);
 
@@ -54,9 +54,4 @@ public interface WeaponInterface {
    * method [equipWhiteMage] equip weapon to a White Mage.
    */
   void equipWhiteMage(WhiteMage whitemage);
-
-  /**
-   * method [toString]
-   * returns a String with the class of this weapon.
-   */
 }

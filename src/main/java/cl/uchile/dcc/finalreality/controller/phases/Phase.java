@@ -5,6 +5,13 @@ import cl.uchile.dcc.finalreality.model.character.GameCharacter;
 import cl.uchile.dcc.finalreality.model.character.player.PlayerCharacter;
 import cl.uchile.dcc.finalreality.model.weapon.WeaponInterface;
 
+/**
+ * This represents the phases of the game.
+ * Use state pattern.
+ *
+ * @author ~Ivo Fuenzalida~
+ */
+
 public class Phase {
     protected GameController controller;
     public void setGameController(GameController controller) {
@@ -31,7 +38,7 @@ public class Phase {
     /**
      * Change the actual phase to the Player Select phase.
      */
-    public void toPlayerSelect() {}
+    public void toPlayerAction() {}
 
     /**
      * Change the actual phase to the Player Win phase.
@@ -52,43 +59,43 @@ public class Phase {
      * Returns a boolean value.
      * True if this phase is the current one, or False if it is not.
      */
-    public boolean isEnemyActionPhase() {return false;}
+    public boolean isEnemyAction() {return false;}
 
     /**
      * Returns a boolean value.
      * True if this phase is the current one, or False if it is not.
      */
-    public boolean isEnemyWinPhase() {return false;}
+    public boolean isEnemyWin() {return false;}
 
     /**
      * Returns a boolean value.
      * True if this phase is the current one, or False if it is not.
      */
-    public boolean isPlayerSelectPhase() {return false;}
+    public boolean isPlayerAction() {return false;}
 
     /**
      * Returns a boolean value.
      * True if this phase is the current one, or False if it is not.
      */
-    public boolean isPlayerWinPhase() {return false;}
+    public boolean isPlayerWin() {return false;}
 
     /**
      * Returns a boolean value.
      * True if this phase is the current one, or False if it is not.
      */
-    public boolean isStartGamePhase() {return false;}
+    public boolean isStartGame() {return false;}
 
     /**
      * Returns a boolean value.
      * True if this phase is the current one, or False if it is not.
      */
-    public boolean isTurnPhase() {return  false;}
+    public boolean isTurn() {return  false;}
 
     /**
      * Returns a boolean value.
      * True if this phase is the current one, or False if it is not.
      */
-    public boolean isWaitingForTurnPhase() {return false;}
+    public boolean isWaitTurn() {return false;}
 
     /**
      * Functions than do something only if the game is in the correct phase.

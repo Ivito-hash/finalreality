@@ -70,15 +70,20 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   }
 
   /**
-   * Returns this player character's attack damage.
+   * Returns this player character's attack damage depending on whether a weapon is equipped.
    */
-
+  @Override
   public int getDamageCharacter() {
     if (this.equippedWeapon == null) {
       return 0;
     } else {
       return this.equippedWeapon.getDamage();
     }
+  }
+
+  @Override
+  public int turnType() {
+    return 1;
   }
 
   /**

@@ -1,10 +1,12 @@
 package cl.uchile.dcc.finalreality.controller.eventHandler;
 
+import cl.uchile.dcc.finalreality.controller.GameController;
+import cl.uchile.dcc.finalreality.model.character.Enemy;
 import java.beans.PropertyChangeEvent;
 
 /**
  * Enemy´s death handler.
- * The EnemyDeathHandler class work as a subscriber of Enemy´s death events
+ * This work as a subscriber of Enemy´s death events.
  *
  * @author ~Ivo Fuenzalida~
  */
@@ -13,16 +15,13 @@ public class DeathEnemyHandler implements Handler {
 
     /**
      * Constructor of EnemyDeathHandler.
-     * Association between the real subscriber a.k.a Enemy's death handler, and the game controller
      */
     public DeathEnemyHandler(GameController controller) {
         this.controller = controller;
     }
 
     /**
-     * Override of the PropertyChangeListener interface method.
-     * It is called when a change is notified, receives the event that suffered the modification.
-     * (In this case what it does is call the controller's onEnemyDeath method)
+     * Call the controller's onEnemyDeath method.
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {

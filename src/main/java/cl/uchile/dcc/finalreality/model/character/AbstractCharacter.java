@@ -1,5 +1,7 @@
 package cl.uchile.dcc.finalreality.model.character;
 
+import java.beans.PropertyChangeSupport;
+import cl.uchile.dcc.finalreality.controller.eventHandler.Handler;
 import cl.uchile.dcc.finalreality.exceptions.InvalidStatValueException;
 import cl.uchile.dcc.finalreality.exceptions.Require;
 import java.util.concurrent.BlockingQueue;
@@ -17,10 +19,12 @@ public abstract class AbstractCharacter implements GameCharacter {
   private final String name;
   protected int maxHp;
   private int currentHp;
-
   private final int defense;
   protected final BlockingQueue<GameCharacter> turnsQueue;
   protected ScheduledExecutorService scheduledExecutor;
+  private final PropertyChangeSupport characterDeathEvent;
+  private final PropertyChangeSupport addToQueueEvent;
+  protected boolean isAlive;
 
   /**
    * Creates a new character.
@@ -38,11 +42,14 @@ public abstract class AbstractCharacter implements GameCharacter {
       @NotNull BlockingQueue<GameCharacter> turnsQueue) throws InvalidStatValueException {
     Require.statValueAtLeast(1, maxHp, "Max HP");
     Require.statValueAtLeast(0, defense, "Defense");
+    characterDeathEvent = new PropertyChangeSupport(this);
+    addToQueueEvent = new PropertyChangeSupport(this);
     this.name = name;
     this.currentHp = maxHp;
     this.maxHp = maxHp;
     this.defense = defense;
     this.turnsQueue = turnsQueue;
+    this.isAlive = true;
   }
 
   /**
@@ -85,6 +92,67 @@ public abstract class AbstractCharacter implements GameCharacter {
     Require.statValueAtLeast(0, hp, "Current HP");
     Require.statValueAtMost(maxHp, hp, "Current HP");
     currentHp = hp;
+  }
+
+  /**
+   * Returns a boolean value depending on if character is a live return True.
+   * else, if character is dead, return False.
+   */
+  @Override
+  public boolean isAlive() {
+    return this.isAlive;
+  }
+
+  /**
+   * The character realize an attack.
+   */
+  @Override
+  public void attack(GameCharacter character) {
+    if (this.isAlive() && character.isAlive()) {
+      character.attackedBy(this.getDamageCharacter());
+    }
+  }
+
+  /**
+   * The character get damaged.
+   */
+  @Override
+  public void attackedBy(int damage) {
+    int receivedDamage = damage - this.getDefense();
+    int currentHP = this.getCurrentHp();
+
+    if (receivedDamage < 0) {
+      receivedDamage = 0;
+    }
+
+    try {
+      this.setCurrentHp(currentHP - receivedDamage);
+    } catch (InvalidStatValueException e) {
+      throw new RuntimeException(e);
+    }
+
+    if (this.getCurrentHp() <= 0) {
+      this.isAlive = false;
+      characterDeathEvent.firePropertyChange(
+              "Character´s Death", null, this
+      );
+    }
+  }
+
+  /**
+   * Adds this character's death event as a suscriber to the respective Death Handler.
+   */
+  @Override
+  public void addSubscriberForDeath(Handler deathHandler) {
+    characterDeathEvent.addPropertyChangeListener(deathHandler);
+  }
+
+  /**
+   * Adds this character's queue event as a suscriber to the QueueCharacterHandler.
+   */
+  @Override
+  public void addSubscriberForAddToQueue(Handler addToQueueHandler) {
+    addToQueueEvent.addPropertyChangeListener(addToQueueHandler);
   }
 
   /**
